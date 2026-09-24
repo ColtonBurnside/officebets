@@ -59,12 +59,19 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 .order-column #orderControls.hidden{display:none}
 
 #heroAvatar{flex-shrink:0}#heroTeammateName{overflow-wrap:anywhere}#tabBtn-markets,#tabBtn-portfolio,#tabBtn-leaderboard{white-space:nowrap}@media(max-width:640px){#tabBtn-markets,#tabBtn-portfolio,#tabBtn-leaderboard{padding:8px 10px;font-size:11px}}
+
+.category-row .outcome-footer{flex-wrap:wrap;gap:8px}.category-row .outcome-footer button{white-space:nowrap;flex-shrink:0}
+.stake-adjuster{display:grid;grid-template-columns:36px minmax(0,1fr) 36px auto;gap:6px}.stake-adjuster input{min-width:0}.prediction-card,.featured-market{cursor:pointer}
+/* Marketplace layout: discovery and category rows beside a compact account rail. */
+.workspace-columns{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:start}.workspace-content,.workspace-sidebar{min-width:0}.workspace-content>*+*,.workspace-sidebar>*+*{margin-top:24px}.workspace-sidebar{display:flex;flex-direction:column}.workspace-sidebar #sidebarNewPrediction{width:100%;justify-content:center}.workspace-sidebar #accountHero{display:flex;flex-direction:column;align-items:stretch;padding:20px;gap:20px}.workspace-sidebar #accountHero>div:first-child{flex-direction:column;align-items:flex-start;gap:12px}.workspace-sidebar #accountHero .border-l{border:0;padding-left:0}.workspace-sidebar #accountHero .gap-x-4{flex-direction:column;align-items:flex-start;gap:10px}.workspace-sidebar #accountHero .gap-x-4>div{flex-wrap:wrap}.workspace-sidebar #heroProfileButton{width:100%;justify-content:center}.settings-button{border-color:#64748b;border-radius:50px;gap:7px;padding:9px 16px;margin-left:auto;white-space:nowrap}.account-menu{position:relative;max-width:220px}.account-menu summary{display:flex;align-items:center;gap:8px;cursor:pointer;list-style:none;border:1px solid #334155;border-radius:10px;padding:7px 10px;font-size:12px}.account-menu summary::-webkit-details-marker{display:none}#navUsername{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.account-menu-options{position:absolute;right:0;top:calc(100% + 8px);width:180px;background:#101b2b;border:1px solid #334155;border-radius:12px;box-shadow:0 16px 40px #0009;padding:6px}.account-menu-options button{display:block;text-align:left;width:100%;padding:10px;border-radius:7px;font-size:13px}.account-menu-options button:hover{background:#223449}.featured-panel,.ending-panel{border:1px solid #263247;border-radius:18px;background:#0e1623;padding:22px}.featured-panel h2,.ending-panel h2,.category-section h2{font-weight:700;font-size:17px}.carousel-controls{display:flex;gap:7px}.featured-market{padding-top:24px;min-height:300px}.featured-market h3{font-size:25px;font-weight:750;line-height:1.25;margin:10px 0}.featured-description{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}.featured-outcomes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:22px 0}.featured-outcome{display:flex;justify-content:space-between;align-items:center;gap:8px;text-align:left;background:#152334;border:1px solid #2e4258;border-radius:10px;padding:12px;font-size:13px;overflow-wrap:anywhere}.featured-outcome:hover{border-color:#22d3ee}.featured-outcome strong{color:#67e8f9;white-space:nowrap}.featured-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;font:12px monospace;color:#94a3b8}.carousel-dots{display:flex;justify-content:center;gap:5px;margin-top:14px}.carousel-dot{width:30px;height:24px;position:relative}.carousel-dot:after{content:'';position:absolute;left:3px;right:3px;top:10px;height:4px;background:#334155;border-radius:4px}.carousel-dot[aria-pressed=true]:after{background:#22d3ee}.category-sections{display:block!important}.category-sections.hidden{display:none!important}.category-section+.category-section{margin-top:28px}.category-row{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:thin;padding:12px 2px 16px}.category-row>.prediction-card{flex:0 0 310px;scroll-snap-align:start}.category-row .market-meta{flex-direction:column;white-space:normal;font-size:10px}.category-row .market-meta>span{white-space:normal}.ending-item{display:flex;flex-direction:column;gap:7px;text-align:left;width:100%;padding:16px 0;border-bottom:1px solid #263247;overflow-wrap:anywhere}.ending-item:last-child{border:0}.ending-item strong{font-size:13px}.ending-item time{font:11px monospace;color:#67e8f9}.ending-item:hover strong{color:#67e8f9}.discovery-empty{padding:26px 0}.admin-row{flex-wrap:wrap}.admin-row>div:first-child{flex:1 1 240px}
+@media(max-width:980px){.workspace-columns{grid-template-columns:minmax(0,1fr) 250px;gap:16px}.featured-panel,.ending-panel{padding:16px}}
+@media(max-width:760px){.workspace-columns{grid-template-columns:minmax(0,1fr)}.workspace-content,.workspace-sidebar{display:contents}.workspace-columns>div>*{margin-top:0}.workspace-sidebar>*+*{margin-top:0}#sidebarNewPrediction{grid-row:1}#topMarkets{grid-row:2}#accountHero{grid-row:3}#channelFilterRow{grid-row:4}#view-markets,#view-portfolio,#view-leaderboard,#view-ledger{grid-row:5}.ending-panel{grid-row:6}.featured-market h3{font-size:22px}.category-row>.prediction-card{flex-basis:min(310px,88vw)}.settings-button{margin-left:0;align-self:flex-start}.featured-outcomes{grid-template-columns:1fr 1fr}.account-menu{max-width:180px}}
+
 </style></head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-tesla-voltage selection:text-black">
 
   <div class="px-4 py-2 text-xs bg-tesla-panel border-b border-tesla-border text-gray-300">
     Play money only • No cash value • Prices and portfolio values are estimates.
-    <button id="navBadgeIn" onclick="openNewTeammateModal()" class="underline ml-2">Badge In</button>
     <span id="appNotice" role="status" aria-live="polite" class="text-amber-300 ml-2"></span>
     <button id="retryActionBtn" onclick="retryPending()" class="hidden underline ml-2 text-tesla-voltage">Retry pending action safely</button>
   </div>
@@ -106,20 +113,14 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <span>Send GW</span>
         </button>
 
-        <!-- Teammate Profile Switcher Pill -->
-        <div class="flex items-center gap-2 pl-2 border-l border-tesla-border">
-          <div class="relative flex items-center">
-            <div id="navAvatar" class="w-7 h-7 rounded-lg bg-[#141b2b] border border-tesla-border flex items-center justify-center text-xs text-tesla-voltage">
-              🏎️
-            </div>
-            <select id="userSwitcherSelect" onchange="switchTeammate(this.value)" aria-label="Your teammate badge" class="appearance-none bg-transparent hover:bg-tesla-card rounded-lg pl-2 pr-6 py-1 text-xs text-gray-200 font-mono font-semibold focus:outline-none cursor-pointer">
-              <!-- Dynamically populated -->
-            </select>
-            <div class="pointer-events-none absolute right-1 flex items-center text-gray-400">
-              <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
-            </div>
+        <button id="navBadgeIn" onclick="openNewTeammateModal()" class="primary">Badge In</button>
+        <details id="accountMenu" class="account-menu hidden">
+          <summary><span id="navAvatar">⚡</span><span id="navUsername"></span><span aria-hidden="true">⌄</span></summary>
+          <div class="account-menu-options">
+            <button onclick="closeAccountMenu();openProfile()">Edit Profile</button>
+            <button onclick="closeAccountMenu();badgeOut()">Badge Out</button>
           </div>
-        </div>
+        </details>
 
       </div>
     </div>
@@ -128,44 +129,6 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   <!-- Main Workspace Container -->
   <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
     
-    <!-- Hero Profile & Balance Banner Card (Matches Screenshot) -->
-    <div class="bg-tesla-card border border-tesla-border rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xl">
-      <!-- Left: Teammate Avatar & Live Metrics -->
-      <div class="flex items-center gap-4">
-        <div id="heroAvatar" class="w-14 h-14 rounded-2xl bg-[#0b0f17] border border-tesla-border flex items-center justify-center text-2xl shadow-inner">
-          🏎️
-        </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <span id="heroTeammateName" class="font-bold text-white text-base"></span>
-            <span id="heroTeammateTag" class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-tesla-border text-gray-300"></span>
-          </div>
-          <p id="heroBio" class="text-xs text-gray-400 mt-1"></p><div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs mt-1.5 font-mono">
-            <div class="flex items-center gap-1.5">
-              <span class="text-gray-400">Available Energy:</span>
-              <span id="heroBalanceDisplay" class="font-bold text-tesla-voltage text-sm">—</span>
-            </div>
-            <div class="flex items-center gap-1.5 border-l border-tesla-border pl-4">
-              <span class="text-gray-400">Estimated positions:</span>
-              <span id="heroPortfolioDisplay" class="font-bold text-white text-sm">0.00 GW</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right: Action Buttons -->
-      <div class="flex items-center gap-3">
-        <button onclick="openNewMarketModal()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold bg-tesla-red hover:bg-red-600 text-white transition shadow-lg glow-red">
-          <span class="text-base font-bold leading-none">⊕</span>
-          <span>New Prediction</span>
-        </button>
-        <button id="heroProfileButton" onclick="getActiveUser()?openProfile():openNewTeammateModal()" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold bg-[#121826] hover:bg-[#182033] border border-tesla-border text-gray-200 transition">
-          <i data-lucide="contact" class="w-4 h-4 text-gray-400"></i>
-          <span>Badge In</span>
-        </button>
-      </div>
-    </div>
-
     <!-- Sub-Navbar & Search Filter (Matches Screenshot) -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
       <!-- Tabs Container Pill -->
@@ -182,8 +145,9 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <span>Grid Ranks</span>
           <span>🏆</span>
         </button>
-        <button onclick="openSettings()" class="px-4 py-2 text-gray-400 hover:text-white">Settings ⚙</button>
       </div>
+
+      <button id="settingsButton" onclick="openSettings()" class="utility settings-button"><span aria-hidden="true">⚙</span> Settings</button>
 
       <!-- Live Search Bar -->
       <div class="relative w-full md:w-80">
@@ -194,20 +158,24 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       </div>
     </div>
 
+    <div class="workspace-columns">
+      <div class="workspace-content">
+        <section id="topMarkets" class="featured-panel" aria-label="Top volume predictions" aria-roledescription="carousel">
+          <div class="section-heading"><div><span class="eyebrow">On the grid</span><h2>Top volume</h2></div><div class="carousel-controls"><button id="featuredPrev" class="utility" aria-label="Previous top prediction" onclick="moveFeatured(-1)">←</button><button id="featuredNext" class="utility" aria-label="Next top prediction" onclick="moveFeatured(1)">→</button></div></div>
+          <p class="muted">Top 5 active predictions by recorded buy + sell volume.</p>
+          <div id="featuredMarket" aria-live="polite"></div><div id="featuredDots" class="carousel-dots" aria-label="Choose a top prediction"></div>
+        </section>
     <!-- Channel / Category Selector (Matches Screenshot) -->
     <div id="channelFilterRow" class="flex items-center gap-2 overflow-x-auto hide-scrollbar text-xs font-mono">
       <span class="text-gray-500 uppercase tracking-wider text-[11px] mr-1">CHANNEL:</span>
       <div id="categoryFilterContainer" class="flex items-center gap-2">
         <!-- Dynamically injected channel pills -->
       </div>
-      <button onclick="openManageCategoriesModal()" class="px-3 py-1.5 rounded-lg border border-tesla-border bg-[#0d121c] hover:bg-tesla-cardHover text-gray-300 hover:text-white transition inline-flex items-center gap-1 text-xs">
-        <i data-lucide="settings" class="w-3.5 h-3.5"></i>
-        <span>Edit Channels</span>
-      </button>
+
     </div>
 
     <!-- VIEW 1: MARKETS GRID -->
-    <section id="view-markets" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    <section id="view-markets" class="category-sections">
       <!-- Market cards injected here -->
     </section>
 
@@ -286,6 +254,49 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       </div>
     </section>
 
+      </div>
+      <aside class="workspace-sidebar" aria-label="Your account and closing predictions">
+        <button onclick="openNewMarketModal()" id="sidebarNewPrediction" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold bg-tesla-red hover:bg-red-600 text-white transition shadow-lg glow-red">
+          <span class="text-base font-bold leading-none">⊕</span>
+          <span>New Prediction</span>
+        </button>
+    <!-- Hero Profile & Balance Banner Card (Matches Screenshot) -->
+    <div id="accountHero" class="bg-tesla-card border border-tesla-border rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xl">
+      <!-- Left: Teammate Avatar & Live Metrics -->
+      <div class="flex items-center gap-4">
+        <div id="heroAvatar" class="w-14 h-14 rounded-2xl bg-[#0b0f17] border border-tesla-border flex items-center justify-center text-2xl shadow-inner">
+          🏎️
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span id="heroTeammateName" class="font-bold text-white text-base"></span>
+            <span id="heroTeammateTag" class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-tesla-border text-gray-300"></span>
+          </div>
+          <p id="heroBio" class="text-xs text-gray-400 mt-1"></p><div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs mt-1.5 font-mono">
+            <div class="flex items-center gap-1.5">
+              <span class="text-gray-400">Available Energy:</span>
+              <span id="heroBalanceDisplay" class="font-bold text-tesla-voltage text-sm">—</span>
+            </div>
+            <div class="flex items-center gap-1.5 border-l border-tesla-border pl-4">
+              <span class="text-gray-400">Estimated positions:</span>
+              <span id="heroPortfolioDisplay" class="font-bold text-white text-sm">0.00 GW</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Action Buttons -->
+      <div class="flex items-center gap-3">
+        <button id="heroProfileButton" onclick="getActiveUser()?openProfile():openNewTeammateModal()" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold bg-[#121826] hover:bg-[#182033] border border-tesla-border text-gray-200 transition">
+          <i data-lucide="contact" class="w-4 h-4 text-gray-400"></i>
+          <span>Badge In</span>
+        </button>
+      </div>
+    </div>
+
+        <section class="ending-panel" aria-labelledby="endingTitle"><div class="section-heading"><h2 id="endingTitle">Ending soon</h2><span aria-hidden="true">◷</span></div><div id="endingSoon"></div></section>
+      </aside>
+    </div>
   </main>
 
   <!-- MODALS CONTAINER -->
@@ -319,9 +330,11 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <span id="inputAmountLabel">Stake Amount (GW):</span>
           <span id="maxAvailableLabel" class="font-mono text-gray-300">Available: 0.00 GW</span>
         </div>
-        <div class="relative">
-          <input type="number" id="tradeAmountInput" oninput="useAllTrade=false;recalculateTradePreview()" min="0.00000001" step="any" class="w-full bg-[#080b11] border border-tesla-border rounded-xl pl-3 pr-16 py-2.5 text-white font-mono text-sm focus:outline-none focus:border-tesla-voltage" placeholder="0.00">
-          <button onclick="fillMaxTrade()" class="absolute right-2.5 top-1/2 -translate-y-1/2 px-2 py-0.5 rounded bg-tesla-border hover:bg-gray-700 text-[10px] font-mono text-gray-300 uppercase">Max</button>
+        <div class="stake-adjuster">
+          <button type="button" class="utility" aria-label="Decrease stake by one" onclick="adjustTradeAmount(-1)">−</button>
+          <input type="number" id="tradeAmountInput" oninput="useAllTrade=false;recalculateTradePreview()" min="0" step="1" aria-label="Stake amount or shares" class="w-full bg-[#080b11] border border-tesla-border rounded-xl px-3 py-2.5 text-white font-mono text-sm focus:outline-none focus:border-tesla-voltage" placeholder="0.00">
+          <button type="button" class="utility" aria-label="Increase stake by one" onclick="adjustTradeAmount(1)">+</button>
+          <button type="button" onclick="fillMaxTrade()" class="utility">Max</button>
         </div>
 
         <!-- AMM Pricing Breakdown -->
@@ -569,7 +582,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   </div>
 
   <!-- JAVASCRIPT LOGIC ENGINE -->
-<div id="settingsModal" role="dialog" aria-modal="true" aria-label="Settings" class="fixed inset-0 z-50 hidden utility-overlay"><div class="utility-dialog"><button class="close-utility" aria-label="Close settings" onclick="hideUtility('settingsModal')">✕</button><h2>Settings</h2><p class="muted">Your grid, your team.</p><div class="settings-links"><button class="utility" onclick="hideUtility('settingsModal');openSyncModal()">Sync Options</button><button class="utility" id="tabBtn-ledger" onclick="hideUtility('settingsModal');setMainTab('ledger')">Power Audit</button><button class="utility" onclick="hideUtility('settingsModal');openManageCategoriesModal()">Manage Channels</button><button class="utility" onclick="hideUtility('settingsModal');badgeOut()">Badge Out</button></div><section id="adminTools"></section></div></div>
+<div id="settingsModal" role="dialog" aria-modal="true" aria-label="Settings" class="fixed inset-0 z-50 hidden utility-overlay"><div class="utility-dialog"><button class="close-utility" aria-label="Close settings" onclick="hideUtility('settingsModal')">✕</button><h2>Settings</h2><p class="muted">Your grid, your team.</p><div class="settings-links"><button class="utility" onclick="hideUtility('settingsModal');openSyncModal()">Sync Options</button><button class="utility" id="tabBtn-ledger" onclick="hideUtility('settingsModal');setMainTab('ledger')">Power Audit</button><button class="utility" onclick="hideUtility('settingsModal');openManageCategoriesModal()">Edit Channels</button><button class="utility" onclick="hideUtility('settingsModal');badgeOut()">Badge Out</button></div><section id="adminTools"></section></div></div>
 <div id="profileModal" role="dialog" aria-modal="true" aria-label="Edit Profile" class="fixed inset-0 z-50 hidden utility-overlay"><div class="utility-dialog compact"><button class="close-utility" aria-label="Close profile" onclick="hideUtility('profileModal')">✕</button><h2>Edit Profile</h2><form onsubmit="saveProfile(event)"><label>Display name<input id="profileName" maxlength="40" required autocomplete="nickname"></label><label>Avatar<input id="profileAvatar" maxlength="16" required aria-label="Profile avatar"></label><div id="avatarChoices" class="avatar-choices"></div><label>Subtitle / bio <span class="muted">Optional</span><input id="profileBio" maxlength="120" placeholder="Chief optimism officer"></label><button type="submit" class="primary">Save Profile</button></form></div></div>
 <div id="adminUserModal" role="dialog" aria-modal="true" aria-label="Manage teammate" class="fixed inset-0 z-50 hidden utility-overlay"><div class="utility-dialog compact"><button class="close-utility" aria-label="Close teammate editor" onclick="hideUtility('adminUserModal')">✕</button><h2>Manage teammate</h2><form onsubmit="saveAdminUser(event)"><label>Display name<input id="adminName" required maxlength="40"></label><label>Available energy (GW)<input id="adminBalance" required type="number" min="0" max="1000000000000" step="0.01"></label><p class="muted">Sets available energy only. Existing positions stay intact. Every adjustment is recorded in Power Audit.</p><button type="submit" class="primary">Save teammate</button></form></div></div>
 
@@ -1014,6 +1027,11 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       }
     }
 
+    function adjustTradeAmount(delta) {
+      const input=document.getElementById('tradeAmountInput');
+      input.value=String(Math.max(0,Math.round(((Number(input.value)||0)+delta)*1e10)/1e10));
+      useAllTrade=false;recalculateTradePreview();
+    }
     function fillMaxTrade() {
       const user=getActiveUser();
       const slip=user?.slips.find(p=>!p.settled && p.marketId===activeTrade.marketId && p.outcomeIdx===activeTrade.outcomeIdx);
@@ -1067,8 +1085,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 
       const creator = state.users.find(u => u.id === market.creatorId);
       const creatorName = creator ? creator.name : 'Unknown';
-      const isCreator = (market.creatorId === localActiveUserId || getActiveUser()?.isAdmin);
-      if (!isCreator) {
+      const canResolve = (market.creatorId === localActiveUserId || getActiveUser()?.isAdmin);
+      if (!canResolve) {
         alert(`Only the market creator (${creatorName}) or an admin can settle this prediction.`);
         return;
       }
@@ -1092,6 +1110,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         container.appendChild(btn);
       });
 
+      closeTradeModal();hideUtility('settingsModal');
       document.getElementById('settleModal').classList.remove('hidden');
       lucide.createIcons();
     }
@@ -1300,7 +1319,13 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       });
     }
 
+    function makePredictionClickable(card,market){
+      card.tabIndex=0;card.setAttribute('aria-label','Open prediction: '+market.title);
+      card.onclick=e=>{if(!e.target.closest('button,a,input,select,textarea')&&!window.getSelection()?.toString())openTradeModal(market.id,0);};
+      card.onkeydown=e=>{if(e.target===card&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openTradeModal(market.id,0);}};
+    }
     function renderMarketsGrid() {
+      const positions=new Map([...document.querySelectorAll('.category-row')].map(row=>[row.getAttribute('aria-label'),row.scrollLeft]));
       const grid = document.getElementById('view-markets');
       grid.innerHTML = '';
 
@@ -1328,6 +1353,21 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         return;
       }
 
+      const categoryRows = new Map();
+      for(const category of state.categories) {
+        const markets = filtered.filter(m=>m.categoryId===category.id);
+        if(!markets.length) continue;
+        const section=document.createElement('section');section.className='category-section';
+        const heading=document.createElement('div');heading.className='section-heading';
+        const title=document.createElement('h2');title.textContent=category.name;heading.appendChild(title);
+        const controls=document.createElement('div');controls.className='carousel-controls';
+        const row=document.createElement('div');row.className='category-row';row.tabIndex=0;row.setAttribute('aria-label',category.name+' predictions');
+        for(const [direction,label] of [[-1,'Previous'],[1,'Next']]) {
+          const button=document.createElement('button');button.className='utility';button.textContent=direction<0?'←':'→';button.setAttribute('aria-label',label+' '+category.name+' predictions');
+          button.onclick=()=>row.scrollBy({left:direction*row.clientWidth*.85,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});controls.appendChild(button);
+        }
+        heading.appendChild(controls);section.append(heading,row);grid.appendChild(section);categoryRows.set(category.id,row);
+      }
       filtered.forEach(market => {
         const cat = state.categories.find(c => c.id === market.categoryId) || { name: 'General' };
         const creator = state.users.find(u => u.id === market.creatorId);
@@ -1338,7 +1378,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         // Sum of outcome reserves shown as the market's current CPMM reserve.
         const totalReserve = reserves.reduce((a, b) => a + b, 0);
 
-        const card = document.createElement('div');
+        const card = document.createElement('article');
+        makePredictionClickable(card,market);
         card.className = `prediction-card rounded-2xl bg-tesla-card border ${market.resolved ? 'border-tesla-border/50 opacity-80' : 'border-tesla-border hover:border-gray-600'} p-5 flex flex-col justify-between transition shadow-xl`;
 
         // Card Top (Matches Screenshot)
@@ -1379,7 +1420,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
                   <div class="h-full ${isWinner ? 'bg-emerald-400' : 'bg-tesla-voltage'} transition-all duration-500" style="width: ${pct}%"></div>
                 </div>
               </div>
-              <div class="flex justify-between items-center text-[11px] pt-1 border-t border-[#182235]">
+              <div class="outcome-footer flex justify-between items-center text-[11px] pt-1 border-t border-[#182235]">
                 <span class="text-gray-400 font-mono">${userHeld.toFixed(0)} shares</span>
                 ${status.code === 'OPEN' ? `
                   <button onclick="openTradeModal('${market.id}',${idx}, 'buy')" class="bg-[#182235] hover:bg-[#22304a] border border-[#273752] text-white px-2.5 py-1 rounded-lg font-semibold text-xs transition flex items-center gap-1">
@@ -1399,26 +1440,19 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <div class="market-actions"><button class="utility" onclick="openTradeModal('${market.id}',0)">View prediction ↗</button>${marketControls(market)}</div>`;
 
         card.innerHTML = cardHtml;
-        grid.appendChild(card);
+        (categoryRows.get(market.categoryId)||grid).appendChild(card);
       });
 
+      for(const row of grid.querySelectorAll('.category-row')) row.scrollLeft=positions.get(row.getAttribute('aria-label'))||0;
       lucide.createIcons();
     }
 
     function renderUserSelects() {
-      const switcher = document.getElementById('userSwitcherSelect');
       const transferSelect = document.getElementById('transferRecipientSelect');
       
-      switcher.innerHTML = '<option value="">Choose your badge</option>';
       transferSelect.innerHTML = '';
 
       state.users.forEach(u => {
-        const opt = document.createElement('option');
-        opt.value = u.id;
-        opt.textContent = `${u.name} (${u.balance.toFixed(2)} GW)`;
-        if (u.id === localActiveUserId) opt.selected = true;
-        if (u.active) switcher.appendChild(opt);
-
         if (u.id !== localActiveUserId && u.active) {
           const tOpt = document.createElement('option');
           tOpt.value = u.id;
@@ -1447,12 +1481,16 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         heroName.textContent='Choose your badge'; heroTag.textContent=''; heroBal.textContent='—'; heroPort.textContent='—';
         document.getElementById('mySlipsCount').textContent='(0)';
       }
-      switcher.value=user?user.id:'';
+      document.getElementById('accountMenu').classList.toggle('hidden',!user);
+      document.getElementById('navUsername').textContent=user?.name || '';
+      if(!user) closeAccountMenu();
       document.getElementById('navBadgeIn').classList.toggle('hidden',!!user);
       document.querySelector('#heroProfileButton span').textContent=user?'Edit Profile':'Badge In';
       document.getElementById('heroAvatar').textContent=user?.avatar || '⚡';
       document.getElementById('navAvatar').textContent=user?.avatar || '⚡';
       document.getElementById('heroBio').textContent=user?.bio || '';
+      if(!user) {hideUtility('profileModal');hideUtility('adminUserModal');}
+      if(!user?.isAdmin) hideUtility('adminUserModal');
       renderBadgeOptions();
     }
 
@@ -1471,6 +1509,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 
     function setMainTab(tab) {
       currentMainTab = tab;
+      document.getElementById('topMarkets').classList.toggle('hidden',tab!=='markets');
       ['markets', 'portfolio', 'leaderboard', 'ledger'].forEach(t => {
         const el = document.getElementById(`view-${t}`);
         const btn = document.getElementById(`tabBtn-${t}`);
@@ -1497,6 +1536,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
 
     function renderAll() {
       renderUserSelects();
+      renderDiscovery();
+      if(!document.getElementById('settingsModal').classList.contains('hidden')) renderAdmin();
       renderCategoryFilters();
       renderCategoryDropdown();
       if (currentMainTab === 'markets') renderMarketsGrid();
@@ -1806,11 +1847,42 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     function hideUtility(id){document.getElementById(id).classList.add('hidden');}
     function openProfile(){const u=getActiveUser();if(!u)return openNewTeammateModal();document.getElementById('profileName').value=u.name;document.getElementById('profileAvatar').value=u.avatar||'🏎️';document.getElementById('profileBio').value=u.bio||'';const list=document.getElementById('avatarChoices');list.innerHTML='';for(const emoji of ['🏎️','⚡','🚀','🦊','🐈','🦉','🌵','🎯','🧠','👑','🍀','🤖']){const b=document.createElement('button');b.type='button';b.textContent=emoji;b.setAttribute('aria-label','Use '+emoji+' avatar');b.onclick=()=>document.getElementById('profileAvatar').value=emoji;list.appendChild(b);}document.getElementById('profileModal').classList.remove('hidden');}
     async function saveProfile(e){e.preventDefault();if(await sendAction('profile',{name:document.getElementById('profileName').value.trim(),avatar:document.getElementById('profileAvatar').value.trim(),bio:document.getElementById('profileBio').value.trim()}))hideUtility('profileModal');}
+
+    function closeAccountMenu(){document.getElementById('accountMenu').open=false;}
+    document.addEventListener('click',e=>{if(!document.getElementById('accountMenu').contains(e.target))closeAccountMenu();});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'){const menu=document.getElementById('accountMenu');if(menu.open){closeAccountMenu();menu.querySelector('summary').focus();}}});
+    let featuredMarketId=null;
+    function topVolumeMarkets(){return state.markets.filter(m=>!m.resolved).sort((a,b)=>(Number(b.volume)||0)-(Number(a.volume)||0)||new Date(b.createdAt)-new Date(a.createdAt)||a.id.localeCompare(b.id)).slice(0,5);}
+    function moveFeatured(direction){const markets=topVolumeMarkets();if(!markets.length)return;const current=Math.max(0,markets.findIndex(m=>m.id===featuredMarketId));featuredMarketId=markets[(current+direction+markets.length)%markets.length].id;renderFeatured();}
+    function renderFeatured(){
+      const markets=topVolumeMarkets(),host=document.getElementById('featuredMarket'),dots=document.getElementById('featuredDots');
+      if(!markets.some(m=>m.id===featuredMarketId))featuredMarketId=markets[0]?.id||null;
+      const market=markets.find(m=>m.id===featuredMarketId);dots.innerHTML='';
+      for(const id of ['featuredPrev','featuredNext'])document.getElementById(id).disabled=markets.length<2;
+      if(!market){host.innerHTML='<p class="discovery-empty muted">No active predictions yet. Create one to get the grid going.</p>';return;}
+      const probs=getImpliedProbabilities(market.outcomes.map(o=>o.poolReserve)),category=state.categories.find(c=>c.id===market.categoryId),index=markets.indexOf(market);
+      host.innerHTML=`<article class="featured-market" aria-roledescription="slide" aria-label="${index+1} of ${markets.length}"><span class="eyebrow">${escapeHtml(category?.name||'General')} · #${index+1}</span><h3><button class="market-title-button" onclick="openTradeModal('${market.id}',0)">${escapeHtml(market.title)}</button></h3><p class="featured-description muted">${escapeHtml(market.description||'Explore the outcomes and make your call.')}</p><div class="featured-outcomes">${market.outcomes.map((o,i)=>`<button class="featured-outcome" onclick="openTradeModal('${market.id}',${i})"><span>${escapeHtml(o.name)}</span><strong>${(probs[i]*100).toFixed(1)}%</strong></button>`).join('')}</div><div class="featured-footer"><span>${(Number(market.volume)||0).toLocaleString(undefined,{maximumFractionDigits:2})} GW volume</span><button class="utility" onclick="openTradeModal('${market.id}',0)">View prediction ↗</button></div></article>`;
+      makePredictionClickable(host.querySelector('article'),market);
+      for(const m of markets){const b=document.createElement('button');b.className='carousel-dot';b.setAttribute('aria-label','Show top prediction '+(markets.indexOf(m)+1));b.setAttribute('aria-pressed',String(m.id===market.id));b.onclick=()=>{featuredMarketId=m.id;renderFeatured();document.querySelector('#featuredDots [aria-pressed="true"]').focus();};dots.appendChild(b);}
+    }
+    function renderDiscovery(){
+      renderFeatured();const host=document.getElementById('endingSoon');host.innerHTML='';
+      const markets=state.markets.filter(m=>getMarketStatus(m).code==='OPEN').sort((a,b)=>new Date(a.closesAt)-new Date(b.closesAt)||a.id.localeCompare(b.id)).slice(0,5);
+      for(const market of markets){const button=document.createElement('button');button.className='ending-item';button.onclick=()=>openTradeModal(market.id,0);const title=document.createElement('strong');title.textContent=market.title;const time=document.createElement('time');time.dateTime=market.closesAt;time.textContent=new Date(market.closesAt).toLocaleString(undefined,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});button.append(title,time);host.appendChild(button);}
+      if(!markets.length)host.innerHTML='<p class="muted discovery-empty">No open predictions ending soon.</p>';
+    }
+    async function deleteAccount(id){
+      const user=state.users.find(u=>u.id===id);if(!getActiveUser()?.isAdmin||!user||id===localActiveUserId)return;
+      const confirmation=prompt(`Permanently delete ${user.name}? Their badge, comments and positions will be removed; unused GW returns to the house. Their predictions transfer to you. Market prices, other players and audit history are preserved. This cannot be undone.\n\nType the badge name to confirm:`);
+      if(confirmation!==user.name)return;
+      if(await sendAction('delete_user',{user:id,confirmName:confirmation})){renderAdmin();showNotice('Account deleted.');}
+    }
+
     function openSettings(){renderAdmin();document.getElementById('settingsModal').classList.remove('hidden');}
     function renderAdmin(){const host=document.getElementById('adminTools');if(!host)return;host.innerHTML='';if(!getActiveUser()?.isAdmin)return;host.innerHTML='<h3>Organizer tools</h3><p class="muted">Honor-system access, just like badges. User changes and refunds are recorded in Power Audit.</p><h3>Teammates</h3>';
-      for(const u of state.users){const row=document.createElement('div');row.className='admin-row';row.innerHTML=`<div>${escapeHtml(u.avatar||'🏎️')} <strong>${escapeHtml(u.name)}</strong><p class="muted">${u.balance.toFixed(2)} GW available · ${calculateUserPortfolioValue(u).toFixed(2)} GW estimated positions${u.isAdmin?' · Organizer':''}</p></div>`;const b=document.createElement('button');b.className='utility';b.textContent='Edit teammate';b.onclick=()=>openAdminUser(u.id);row.appendChild(b);host.appendChild(row);}
-      const h=document.createElement('h3');h.textContent='Delete predictions & refund';host.appendChild(h);
-      for(const m of state.markets){const row=document.createElement('div');row.className='admin-row';row.innerHTML=`<div><strong>${escapeHtml(m.title)}</strong><p class="muted">${m.resolved?'Resolved · no additional refunds':'Refund remaining stakes; retain completed sales'}</p></div>`;const b=document.createElement('button');b.className='utility danger';b.textContent='Delete';b.onclick=()=>deletePrediction(m.id);row.appendChild(b);host.appendChild(row);}
+      for(const u of state.users){const row=document.createElement('div');row.className='admin-row';row.innerHTML=`<div>${escapeHtml(u.avatar||'🏎️')} <strong>${escapeHtml(u.name)}</strong><p class="muted">${u.balance.toFixed(2)} GW available · ${calculateUserPortfolioValue(u).toFixed(2)} GW estimated positions${u.isAdmin?' · Organizer':''}</p></div>`;const b=document.createElement('button');b.className='utility';b.textContent='Edit teammate';b.onclick=()=>openAdminUser(u.id);row.appendChild(b);const del=document.createElement('button');del.className='utility danger';del.textContent='Delete account';del.disabled=u.id===localActiveUserId;del.title=del.disabled?'You cannot delete your own active badge':'';del.onclick=()=>deleteAccount(u.id);row.appendChild(del);host.appendChild(row);}
+      const h=document.createElement('h3');h.textContent='Manage all predictions';host.appendChild(h);
+      for(const m of state.markets){const row=document.createElement('div');row.className='admin-row';row.innerHTML=`<div><strong>${escapeHtml(m.title)}</strong><p class="muted">${m.resolved?'Resolved · no additional refunds':'Refund remaining stakes; retain completed sales'}</p></div>`;if(!m.resolved){const resolve=document.createElement('button');resolve.className='utility';resolve.textContent=getMarketStatus(m).code==='OPEN'?'Resolve early':'Resolve';resolve.onclick=()=>openSettleModal(m.id);row.appendChild(resolve);}const b=document.createElement('button');b.className='utility danger';b.textContent='Delete';b.onclick=()=>deletePrediction(m.id);row.appendChild(b);host.appendChild(row);}
     }
     function openAdminUser(id){if(!getActiveUser()?.isAdmin)return;const u=state.users.find(x=>x.id===id);if(!u)return;adminEditingUser=id;document.getElementById('adminName').value=u.name;adminOriginalBalance=u.balance.toFixed(2);document.getElementById('adminBalance').value=adminOriginalBalance;hideUtility('settingsModal');document.getElementById('adminUserModal').classList.remove('hidden');}
     async function saveAdminUser(e){e.preventDefault();const args={user:adminEditingUser,name:document.getElementById('adminName').value.trim()};const val=document.getElementById('adminBalance').value;if(val!==adminOriginalBalance)args.balance=val;if(await sendAction('admin_user',args)){hideUtility('adminUserModal');openSettings();}}
@@ -1821,7 +1893,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     function startRealtime(){realtimeReady=false;if(!supabaseClient)return;const generation=clientGeneration;supabaseClient.channel('officebets-updates').on('postgres_changes',{event:'UPDATE',schema:'public',table:'officebets_updates'},()=>{if(generation===clientGeneration)refreshGrid();}).subscribe(status=>{if(generation!==clientGeneration)return;realtimeReady=status==='SUBSCRIBED';renderPredictionDetails();});}
     function renderActivity(){const host=document.getElementById('marketActivity'),previous=host.scrollTop;host.innerHTML='';for(const e of detailData?.activity||[]){const row=document.createElement('article');row.className='activity-entry'+(e.kind==='COMMENT'?' comment':'');row.innerHTML=`<div class="entry-meta"><strong>${escapeHtml(e.avatar)} ${escapeHtml(e.name)}</strong><time title="${escapeHtmlAttr(new Date(e.at).toLocaleString())}">${escapeHtml(new Date(e.at).toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'}))}</time></div><p>${escapeHtml(e.text)}</p>${e.kind==='COMMENT'?'':`<span class="muted">${escapeHtml(e.kind.replaceAll('_',' '))}${e.amount?` · ${e.amount>0?'+':''}${Number(e.amount).toFixed(2)} GW`:''}</span>`}`;host.appendChild(row);}if(!host.children.length)host.innerHTML='<p class="muted">No activity yet. Start the conversation.</p>';host.scrollTop=previous;}
     async function postComment(e){e.preventDefault();const input=document.getElementById('commentBody'),text=input.value.trim();if(!getActiveUser())return openNewTeammateModal();if(await sendAction('comment',{market:activeTrade.marketId,body:text})){input.value='';await loadMarketDetails(true);}}
-    function renderHistory(){const m=state.markets.find(m=>m.id===activeTrade.marketId);if(!m)return;const all=detailData?.history||[],range=document.getElementById('chartRange').value,cutoff=range==='all'?-Infinity:nowServer()-Number(range)*3600000;chartPoints=all.filter(p=>new Date(p.at).getTime()>=cutoff);if(!chartPoints.length&&all.length)chartPoints=[all[all.length-1]];const legend=document.getElementById('chartLegend');legend.innerHTML='';m.outcomes.forEach((o,i)=>{const b=document.createElement('button');b.className='legend-button';b.textContent=o.name;b.style.color=chartColors[i];b.setAttribute('aria-pressed',String(!chartHidden.has(i)));b.onclick=()=>{if(chartHidden.has(i))chartHidden.delete(i);else chartHidden.add(i);renderHistory();};legend.appendChild(b);});document.getElementById('chartNote').textContent=all[0]?.kind==='UPGRADE'?'Recorded from this upgrade onward. Earlier odds were not stored.':'Hover, tap, or use the slider to explore. Click a legend to show/hide an outcome.';const host=document.getElementById('oddsChart');if(!chartPoints.length){host.innerHTML='<p class="muted">Loading price history…</p>';return;}const start=new Date(chartPoints[0].at).getTime(),end=Math.max(start+1,new Date(chartPoints.at(-1).at).getTime()),x=p=>44+(new Date(p.at).getTime()-start)/(end-start)*436,y=v=>210-v*184;let svg='<svg viewBox="0 0 500 250" role="img" aria-label="Historical outcome probabilities"><rect width="500" height="250" fill="transparent"/>';for(const v of [0,.25,.5,.75,1])svg+=`<line x1="44" x2="480" y1="${y(v)}" y2="${y(v)}" stroke="#213147"/><text x="2" y="${y(v)+4}" fill="#94a3b8" font-size="10">${v*100}%</text>`;m.outcomes.forEach((o,i)=>{if(chartHidden.has(i))return;const points=chartPoints.map(p=>`${x(p)},${y(p.odds[i]||0)}`).join(' ');svg+=`<polyline points="${points}" fill="none" stroke="${chartColors[i]}" stroke-width="2.5"/>`;const last=chartPoints.at(-1);svg+=`<circle cx="${x(last)}" cy="${y(last.odds[i]||0)}" r="4" fill="${chartColors[i]}"/>`;});svg+=`<line id="chartCursor" x1="480" x2="480" y1="20" y2="214" stroke="#e2e8f0" stroke-dasharray="3 4"/><text x="44" y="240" fill="#64748b" font-size="10">${escapeHtml(new Date(start).toLocaleString(undefined,{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}))}</text><text x="480" y="240" text-anchor="end" fill="#64748b" font-size="10">${escapeHtml(new Date(end).toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'}))}</text></svg>`;host.innerHTML=svg;const slider=document.getElementById('chartScrubber');slider.max=String(chartPoints.length-1);slider.value=slider.max;host.querySelector('svg').onpointermove=e=>{const rect=e.currentTarget.getBoundingClientRect();const target=start+Math.max(0,Math.min(1,((e.clientX-rect.left)/rect.width*500-44)/436))*(end-start);let best=0;chartPoints.forEach((p,i)=>{if(Math.abs(new Date(p.at).getTime()-target)<Math.abs(new Date(chartPoints[best].at).getTime()-target))best=i;});showHistoryPoint(best);};showHistoryPoint(chartPoints.length-1);}
+    function renderHistory(){const m=state.markets.find(m=>m.id===activeTrade.marketId);if(!m)return;const all=detailData?.history||[],range=document.getElementById('chartRange').value,cutoff=range==='all'?-Infinity:nowServer()-Number(range)*3600000;chartPoints=all.filter(p=>new Date(p.at).getTime()>=cutoff);if(!chartPoints.length&&all.length)chartPoints=[all[all.length-1]];if(!chartPoints.length)chartPoints=[{at:new Date(nowServer()).toISOString(),odds:m.resolved?m.outcomes.map((o,i)=>i===m.winningOutcomeIdx?1:0):getImpliedProbabilities(m.outcomes.map(o=>o.poolReserve)),kind:'CURRENT'}];const legend=document.getElementById('chartLegend');legend.innerHTML='';m.outcomes.forEach((o,i)=>{const b=document.createElement('button');b.className='legend-button';b.textContent=o.name;b.style.color=chartColors[i];b.setAttribute('aria-pressed',String(!chartHidden.has(i)));b.onclick=()=>{if(chartHidden.has(i))chartHidden.delete(i);else chartHidden.add(i);renderHistory();};legend.appendChild(b);});document.getElementById('chartNote').textContent=all[0]?.kind==='UPGRADE'?'Recorded from this upgrade onward. Earlier odds were not stored.':'Hover, tap, or use the slider to explore. Click a legend to show/hide an outcome.';if(chartPoints.length===1)document.getElementById('chartNote').textContent=chartPoints[0].kind==='CURRENT'?'Current odds preview; recorded history is not available yet.':'One recorded quote, shown as a flat line. No earlier price changes are implied.';const host=document.getElementById('oddsChart');if(!chartPoints.length){host.innerHTML='<p class="muted">Loading price history…</p>';return;}const start=new Date(chartPoints[0].at).getTime(),end=Math.max(start+1,chartPoints.length===1?nowServer():new Date(chartPoints.at(-1).at).getTime()),x=p=>44+(new Date(p.at).getTime()-start)/(end-start)*436,y=v=>210-v*184;let svg='<svg viewBox="0 0 500 250" role="img" aria-label="Historical outcome probabilities"><rect width="500" height="250" fill="transparent"/>';for(const v of [0,.25,.5,.75,1])svg+=`<line x1="44" x2="480" y1="${y(v)}" y2="${y(v)}" stroke="#213147"/><text x="2" y="${y(v)+4}" fill="#94a3b8" font-size="10">${v*100}%</text>`;m.outcomes.forEach((o,i)=>{if(chartHidden.has(i))return;const points=chartPoints.length===1?`44,${y(chartPoints[0].odds[i]||0)} 480,${y(chartPoints[0].odds[i]||0)}`:chartPoints.map(p=>`${x(p)},${y(p.odds[i]||0)}`).join(' ');svg+=`<polyline points="${points}" fill="none" stroke="${chartColors[i]}" stroke-width="2.5"/>`;const last=chartPoints.at(-1);svg+=`<circle cx="${x(last)}" cy="${y(last.odds[i]||0)}" r="4" fill="${chartColors[i]}"/>`;});svg+=`<line id="chartCursor" x1="480" x2="480" y1="20" y2="214" stroke="#e2e8f0" stroke-dasharray="3 4"/><text x="44" y="240" fill="#64748b" font-size="10">${escapeHtml(new Date(start).toLocaleString(undefined,{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}))}</text><text x="480" y="240" text-anchor="end" fill="#64748b" font-size="10">${escapeHtml(new Date(end).toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'}))}</text></svg>`;host.innerHTML=svg;const slider=document.getElementById('chartScrubber');slider.max=String(chartPoints.length-1);slider.value=slider.max;host.querySelector('svg').onpointermove=e=>{const rect=e.currentTarget.getBoundingClientRect();const target=start+Math.max(0,Math.min(1,((e.clientX-rect.left)/rect.width*500-44)/436))*(end-start);let best=0;chartPoints.forEach((p,i)=>{if(Math.abs(new Date(p.at).getTime()-target)<Math.abs(new Date(chartPoints[best].at).getTime()-target))best=i;});showHistoryPoint(best);};showHistoryPoint(chartPoints.length-1);}
     function showHistoryPoint(index){const point=chartPoints[index],m=state.markets.find(m=>m.id===activeTrade.marketId);if(!point||!m)return;document.getElementById('chartScrubber').value=String(index);document.getElementById('chartReadout').innerHTML=`<div>${escapeHtml(new Date(point.at).toLocaleString())}</div>`+m.outcomes.map((o,i)=>chartHidden.has(i)?'':`<span style="color:${chartColors[i]}">${escapeHtml(o.name)} ${(100*(point.odds[i]||0)).toFixed(1)}%</span>`).join('');const first=new Date(chartPoints[0].at).getTime(),last=Math.max(first+1,new Date(chartPoints.at(-1).at).getTime()),x=44+(new Date(point.at).getTime()-first)/(last-first)*436;const cursor=document.getElementById('chartCursor');if(cursor){cursor.setAttribute('x1',String(x));cursor.setAttribute('x2',String(x));}}
 
     window.addEventListener('DOMContentLoaded', () => {
