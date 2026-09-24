@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src https://*.supabase.co; img-src data:; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src https://*.supabase.co wss://*.supabase.co; img-src data:; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>OfficeBets — Supercharger Edition</title>
   
   <!-- Bundled Tailwind CSS 3.4.19; see THIRD_PARTY_NOTICES.txt -->
@@ -53,12 +53,18 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     .glow-cyan { box-shadow: 0 0 14px rgba(0, 240, 255, 0.2); }
     .glow-red { box-shadow: 0 0 14px rgba(232, 33, 39, 0.35); }
   </style>
-</head>
+<style>:root{color-scheme:dark}button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #22d3ee;outline-offset:3px}.prediction-card{transition:border-color .18s,background .18s,box-shadow .18s,transform .18s;min-width:0}.prediction-card:hover,.prediction-card:focus-within{border-color:#22d3ee!important;background:#111e2d;box-shadow:0 8px 34px #00d5ff22;transform:translateY(-2px)}.prediction-card h3,.prediction-card p,.prediction-card span{overflow-wrap:anywhere}.market-title-button{text-align:left}.market-title-button:hover{color:#67e8f9}.market-meta{display:flex;justify-content:space-between;gap:8px;border-top:1px solid #263247;padding-top:14px;font-size:10px;white-space:nowrap;letter-spacing:-.15px}.market-meta strong{color:#e2e8f0;font-weight:500;margin-left:3px}.market-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.utility{display:inline-flex;align-items:center;justify-content:center;border:1px solid #334155;background:#131d2b;border-radius:8px;padding:7px 10px;font-size:12px;color:#cbd5e1;cursor:pointer}.utility:hover{border-color:#67e8f9;color:white;background:#223449}.danger{color:#fda4af;border-color:#633140}.primary{background:#22d3ee;color:#06131b;border-radius:10px;padding:10px 14px;font-weight:700;font-size:13px}.primary:disabled{opacity:.45;cursor:wait}.profile-bio{font-size:11px;font-weight:400;color:#94a3b8;max-width:280px;overflow-wrap:anywhere}.muted{font-size:12px;color:#94a3b8;line-height:1.65}.prediction-overlay,.utility-overlay{display:flex;align-items:center;justify-content:center;padding:24px;background:#020617dd;backdrop-filter:blur(8px)}.prediction-overlay.hidden,.utility-overlay.hidden{display:none}.prediction-dialog{width:min(1400px,100%);max-height:92dvh;overflow:auto;background:#0c1420;border:1px solid #334155;border-radius:22px;box-shadow:0 30px 100px #0009;padding:24px}.prediction-header{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;position:static!important;background:none!important;border:0!important}.prediction-header h2{font-size:24px;font-weight:750;margin:8px 0}.eyebrow{color:#67e8f9;font:11px monospace;text-transform:uppercase;letter-spacing:2px}.prediction-description{color:#a8b4c7;font-size:13px;line-height:1.6;margin-top:10px;overflow-wrap:anywhere}.prediction-columns{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr);gap:22px;margin-top:24px}.prediction-columns>section{min-width:0;padding:18px;background:#080e18;border:1px solid #213147;border-radius:14px}.prediction-columns h3{font-size:14px;font-weight:700;margin-bottom:14px}.section-heading{display:flex;justify-content:space-between;align-items:center;gap:8px}.section-heading h3{margin:0}.section-heading select{background:#131e2c;border:1px solid #334155;border-radius:6px;font-size:11px;padding:5px}.order-column #orderControls{display:flex;flex-direction:column;gap:16px;margin-top:12px}.odds-chart{width:100%;height:260px;margin-top:18px}.odds-chart svg{width:100%;height:100%;display:block;touch-action:pan-y}.chart-legend{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}.legend-button{border:1px solid #334155;border-radius:6px;padding:4px 7px;font-size:11px;max-width:100%;overflow-wrap:anywhere}.legend-button[aria-pressed=false]{opacity:.4}.chart-readout{min-height:74px;color:#e2e8f0;font:11px/1.8 monospace;margin-top:10px}.chart-readout span{display:inline-block;margin-right:12px}#chartScrubber{width:100%;accent-color:#22d3ee}.activity-feed{height:350px;overflow:auto;margin:15px 0;scrollbar-width:thin}.activity-entry{padding:12px 0;border-bottom:1px solid #1c2839;font-size:12px;overflow-wrap:anywhere}.activity-entry .entry-meta{display:flex;justify-content:space-between;gap:10px;color:#cbd5e1;margin-bottom:5px}.activity-entry time{font-size:10px;color:#64748b;white-space:nowrap}.activity-entry p{color:#94a3b8;white-space:pre-wrap}.activity-entry.comment p{color:#e2e8f0}.live-tag{color:#67e8f9;font:10px monospace}.comment-form{display:flex;flex-direction:column;gap:8px;font-size:12px}.comment-form textarea,.utility-dialog input{width:100%;padding:10px;background:#050b13;border:1px solid #334155;border-radius:8px;color:white}.utility-dialog{position:relative;width:min(760px,100%);max-height:90dvh;overflow:auto;padding:28px;border:1px solid #334155;border-radius:18px;background:#0c1420}.utility-dialog.compact{max-width:450px}.utility-dialog h2{font-size:21px;font-weight:700;margin-bottom:12px}.utility-dialog h3{font-weight:700;margin:22px 0 10px}.utility-dialog form{display:grid;gap:16px}.utility-dialog label{display:block;font-size:12px}.utility-dialog input{display:block;margin-top:6px}.close-utility{position:absolute;top:18px;right:20px;color:#94a3b8;padding:5px}.settings-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.admin-row{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid #233146;padding:12px 0;font-size:12px}.admin-row>div{min-width:0;overflow-wrap:anywhere}.avatar-choices{display:flex;flex-wrap:wrap;gap:7px}.avatar-choices button{font-size:22px;padding:5px;border:1px solid #334155;border-radius:8px}.avatar-choices button:hover{background:#24374c}#heroBio{max-width:500px;overflow-wrap:anywhere}#appNotice:not(:empty){position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:100;background:#17263a;border:1px solid #45637f;border-radius:12px;box-shadow:0 10px 40px #0008;padding:13px 20px;width:max-content;max-width:90vw;color:#e2e8f0;margin:0;font-size:13px}#retryActionBtn{position:fixed;z-index:101;bottom:100px;left:16px}#heroProfileButton{white-space:nowrap}#navAvatar{flex-shrink:0}
+@media(min-width:1024px){#view-markets{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(min-width:1200px){.market-meta{font-size:11px}}@media(max-width:1050px){.prediction-columns{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.activity-column{grid-column:1/-1}.activity-feed{height:250px}.market-meta{flex-direction:column;gap:5px}}@media(max-width:640px){.prediction-overlay,.utility-overlay{padding:8px}.prediction-dialog{padding:16px;max-height:96dvh;border-radius:14px}.prediction-columns{grid-template-columns:1fr;gap:14px;margin-top:16px}.activity-column{grid-column:auto}.prediction-header h2{font-size:20px}.odds-chart{height:220px}.utility-dialog{padding:22px}.market-meta{font-size:10px;flex-direction:column;gap:6px}.market-meta>span{white-space:nowrap}.prediction-card{padding:16px}#userSwitcherSelect{max-width:190px}.prediction-columns>section{padding:14px}}@media(prefers-reduced-motion:reduce){.prediction-card{transition:none;transform:none!important}}
+
+.order-column #orderControls.hidden{display:none}
+
+#heroAvatar{flex-shrink:0}#heroTeammateName{overflow-wrap:anywhere}#tabBtn-markets,#tabBtn-portfolio,#tabBtn-leaderboard{white-space:nowrap}@media(max-width:640px){#tabBtn-markets,#tabBtn-portfolio,#tabBtn-leaderboard{padding:8px 10px;font-size:11px}}
+</style></head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-tesla-voltage selection:text-black">
 
   <div class="px-4 py-2 text-xs bg-tesla-panel border-b border-tesla-border text-gray-300">
     Play money only • No cash value • Prices and portfolio values are estimates.
-    <button onclick="openNewTeammateModal()" class="underline ml-2">Badge In</button>
+    <button id="navBadgeIn" onclick="openNewTeammateModal()" class="underline ml-2">Badge In</button>
     <span id="appNotice" role="status" aria-live="polite" class="text-amber-300 ml-2"></span>
     <button id="retryActionBtn" onclick="retryPending()" class="hidden underline ml-2 text-tesla-voltage">Retry pending action safely</button>
   </div>
@@ -75,12 +81,12 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         <div>
           <div class="flex items-center gap-2">
             <span class="font-extrabold tracking-wider text-white text-base">OFFICE<span class="text-tesla-red">BETS</span></span>
-            <span class="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 rounded-full bg-cyan-950/70 border border-tesla-voltage/40 text-tesla-voltage font-bold">SUPERCHARGER ED.</span>
+            <span class="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 rounded-full bg-cyan-950/70 border border-tesla-voltage/40 text-tesla-voltage font-bold">SUPERCHARGED</span>
           </div>
           <p class="text-[11px] text-gray-400 font-mono flex items-center gap-1.5 mt-0.5">
             <span id="syncStatusDot" class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
             <span id="syncStatusText">Badge In to play</span>
-            <button onclick="openSyncModal()" class="text-gray-400 hover:text-tesla-voltage underline ml-1">Sync Options</button>
+            <button id="navSyncOptions" onclick="openSyncModal()" class="text-gray-400 hover:text-tesla-voltage underline ml-1">Sync Options</button>
           </p>
         </div>
       </div>
@@ -103,7 +109,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         <!-- Teammate Profile Switcher Pill -->
         <div class="flex items-center gap-2 pl-2 border-l border-tesla-border">
           <div class="relative flex items-center">
-            <div class="w-7 h-7 rounded-lg bg-[#141b2b] border border-tesla-border flex items-center justify-center text-xs text-tesla-voltage">
+            <div id="navAvatar" class="w-7 h-7 rounded-lg bg-[#141b2b] border border-tesla-border flex items-center justify-center text-xs text-tesla-voltage">
               🏎️
             </div>
             <select id="userSwitcherSelect" onchange="switchTeammate(this.value)" aria-label="Your teammate badge" class="appearance-none bg-transparent hover:bg-tesla-card rounded-lg pl-2 pr-6 py-1 text-xs text-gray-200 font-mono font-semibold focus:outline-none cursor-pointer">
@@ -126,7 +132,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     <div class="bg-tesla-card border border-tesla-border rounded-2xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xl">
       <!-- Left: Teammate Avatar & Live Metrics -->
       <div class="flex items-center gap-4">
-        <div class="w-14 h-14 rounded-2xl bg-[#0b0f17] border border-tesla-border flex items-center justify-center text-2xl shadow-inner">
+        <div id="heroAvatar" class="w-14 h-14 rounded-2xl bg-[#0b0f17] border border-tesla-border flex items-center justify-center text-2xl shadow-inner">
           🏎️
         </div>
         <div>
@@ -134,7 +140,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
             <span id="heroTeammateName" class="font-bold text-white text-base"></span>
             <span id="heroTeammateTag" class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-tesla-border text-gray-300"></span>
           </div>
-          <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs mt-1.5 font-mono">
+          <p id="heroBio" class="text-xs text-gray-400 mt-1"></p><div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs mt-1.5 font-mono">
             <div class="flex items-center gap-1.5">
               <span class="text-gray-400">Available Energy:</span>
               <span id="heroBalanceDisplay" class="font-bold text-tesla-voltage text-sm">—</span>
@@ -153,7 +159,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <span class="text-base font-bold leading-none">⊕</span>
           <span>New Prediction</span>
         </button>
-        <button onclick="openNewTeammateModal()" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold bg-[#121826] hover:bg-[#182033] border border-tesla-border text-gray-200 transition">
+        <button id="heroProfileButton" onclick="getActiveUser()?openProfile():openNewTeammateModal()" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold bg-[#121826] hover:bg-[#182033] border border-tesla-border text-gray-200 transition">
           <i data-lucide="contact" class="w-4 h-4 text-gray-400"></i>
           <span>Badge In</span>
         </button>
@@ -165,7 +171,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       <!-- Tabs Container Pill -->
       <div class="inline-flex items-center p-1 rounded-xl bg-[#0d121c] border border-tesla-border text-xs font-medium hide-scrollbar overflow-x-auto">
         <button onclick="setMainTab('markets')" id="tabBtn-markets" class="px-4 py-2 rounded-lg bg-tesla-voltage text-black font-bold transition flex items-center gap-1.5">
-          <span>Shift Markets</span>
+          <span>Markets</span>
           <span>⚡</span>
         </button>
         <button onclick="setMainTab('portfolio')" id="tabBtn-portfolio" class="px-4 py-2 rounded-lg text-gray-400 hover:text-white transition flex items-center gap-1.5">
@@ -176,10 +182,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <span>Grid Ranks</span>
           <span>🏆</span>
         </button>
-        <button onclick="setMainTab('ledger')" id="tabBtn-ledger" class="px-4 py-2 rounded-lg text-gray-400 hover:text-white transition flex items-center gap-1.5">
-          <span>Power Audit</span>
-          <span>📜</span>
-        </button>
+        <button onclick="openSettings()" class="px-4 py-2 text-gray-400 hover:text-white">Settings ⚙</button>
       </div>
 
       <!-- Live Search Bar -->
@@ -288,19 +291,16 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   <!-- MODALS CONTAINER -->
 
   <!-- Modal: Trade Drawer (Exact Invertible CPMM Buy & Sell Engine) -->
-  <div id="tradeModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-    <div class="bg-tesla-card border border-tesla-border w-full max-w-md rounded-2xl p-6 relative space-y-4 shadow-2xl">
-      <button aria-label="Close dialog" onclick="closeTradeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
-      
-      <div>
-        <span id="modalCategoryBadge" class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-cyan-950/60 text-tesla-voltage border border-tesla-voltage/30">Category</span>
-        <h3 id="modalMarketTitle" class="text-sm font-bold text-white mt-2 leading-snug"></h3>
-        <div id="modalMarketDesc" class="text-xs text-gray-400 mt-1"></div>
-      </div>
-
-      <!-- Buy / Sell Mode Toggle -->
+  <div id="tradeModal" role="dialog" aria-modal="true" aria-labelledby="modalMarketTitle" class="fixed inset-0 z-50 hidden prediction-overlay">
+    <div class="prediction-dialog">
+      <header class="prediction-header"><div><span id="modalCategoryBadge" class="eyebrow"></span><h2 id="modalMarketTitle"></h2><div id="predictionByline" class="muted"></div></div><button class="utility" aria-label="Close prediction" onclick="closeTradeModal()">✕</button></header>
+      <div id="modalMarketDesc" class="prediction-description"></div><div id="predictionTools" class="market-actions"></div>
+      <div class="prediction-columns">
+        <section class="chart-column"><div class="section-heading"><h3>Market odds</h3><select id="chartRange" aria-label="Chart time range" onchange="renderHistory()"><option value="all">All time</option><option value="24">24 hours</option><option value="1">1 hour</option></select></div>
+          <div id="chartLegend" class="chart-legend"></div><div id="oddsChart" class="odds-chart"></div>
+          <input id="chartScrubber" type="range" min="0" max="0" value="0" aria-label="Explore historical odds" oninput="showHistoryPoint(Number(this.value))"><div id="chartReadout" aria-live="polite" class="chart-readout"></div><p id="chartNote" class="muted"></p>
+        </section>
+        <section class="order-column"><h3>Place your prediction</h3><p id="tradingStatus" class="muted"></p><div id="orderControls">      <!-- Buy / Sell Mode Toggle -->
       <div class="flex rounded-xl bg-[#090c12] p-1 border border-tesla-border text-xs font-semibold">
         <button id="toggleTradeModeBuy" onclick="setTradeMode('buy')" class="flex-1 py-1.5 rounded-lg bg-tesla-voltage text-black font-bold transition">
           Buy Shares (Stake)
@@ -320,7 +320,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <span id="maxAvailableLabel" class="font-mono text-gray-300">Available: 0.00 GW</span>
         </div>
         <div class="relative">
-          <input type="number" id="tradeAmountInput" oninput="recalculateTradePreview()" min="0.00000001" step="any" class="w-full bg-[#080b11] border border-tesla-border rounded-xl pl-3 pr-16 py-2.5 text-white font-mono text-sm focus:outline-none focus:border-tesla-voltage" placeholder="0.00">
+          <input type="number" id="tradeAmountInput" oninput="useAllTrade=false;recalculateTradePreview()" min="0.00000001" step="any" class="w-full bg-[#080b11] border border-tesla-border rounded-xl pl-3 pr-16 py-2.5 text-white font-mono text-sm focus:outline-none focus:border-tesla-voltage" placeholder="0.00">
           <button onclick="fillMaxTrade()" class="absolute right-2.5 top-1/2 -translate-y-1/2 px-2 py-0.5 rounded bg-tesla-border hover:bg-gray-700 text-[10px] font-mono text-gray-300 uppercase">Max</button>
         </div>
 
@@ -349,10 +349,15 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           Confirm Buy Stake ⚡
         </button>
       </div>
+</div></section>
+        <section class="activity-column"><div class="section-heading"><h3>Team activity</h3><span id="activityLive" class="live-tag">Updating</span></div><div id="marketActivity" class="activity-feed" aria-label="Trade history and comments"></div>
+          <form onsubmit="postComment(event)" class="comment-form"><label for="commentBody">Join the conversation</label><textarea id="commentBody" maxlength="1000" rows="2" placeholder="What’s your take?" required></textarea><button type="submit" class="primary">Post comment</button><p class="muted">Latest 100 trades/events and 100 comments.</p></form>
+        </section>
+      </div>
     </div>
   </div>
 
-  <!-- Modal: Shift Settle (Verified Outcome Distribution) -->
+  <!-- Modal: Resolve prediction (Verified Outcome Distribution) -->
   <div id="settleModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
     <div class="bg-tesla-card border border-tesla-border w-full max-w-md rounded-2xl p-6 relative space-y-4 shadow-2xl">
       <button aria-label="Close dialog" onclick="closeSettleModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
@@ -360,7 +365,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       </button>
 
       <div>
-        <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 font-bold">Shift Settle Verification</span>
+        <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 font-bold">Resolve prediction Verification</span>
         <h3 id="settleMarketTitle" class="text-sm font-bold text-white mt-2 leading-snug"></h3>
         <p id="settlePermissionsNotice" class="text-xs text-gray-400 mt-1"></p>
       </div>
@@ -512,7 +517,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           <i data-lucide="tags" class="w-4 h-4 text-tesla-voltage"></i>
           <span>Shift Channel Directory</span>
         </h3>
-        <p class="text-xs text-gray-400 mt-1">Deleting a channel cascades existing markets safely back to 'Supercharger Lounge'.</p>
+        <p class="text-xs text-gray-400 mt-1">Deleting a channel cascades existing markets safely back to 'General'.</p>
       </div>
 
       <form onsubmit="handleCreateCategorySubmit(event)" class="flex gap-2">
@@ -564,16 +569,19 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
   </div>
 
   <!-- JAVASCRIPT LOGIC ENGINE -->
+<div id="settingsModal" role="dialog" aria-modal="true" aria-label="Settings" class="fixed inset-0 z-50 hidden utility-overlay"><div class="utility-dialog"><button class="close-utility" aria-label="Close settings" onclick="hideUtility('settingsModal')">✕</button><h2>Settings</h2><p class="muted">Your grid, your team.</p><div class="settings-links"><button class="utility" onclick="hideUtility('settingsModal');openSyncModal()">Sync Options</button><button class="utility" id="tabBtn-ledger" onclick="hideUtility('settingsModal');setMainTab('ledger')">Power Audit</button><button class="utility" onclick="hideUtility('settingsModal');openManageCategoriesModal()">Manage Channels</button><button class="utility" onclick="hideUtility('settingsModal');badgeOut()">Badge Out</button></div><section id="adminTools"></section></div></div>
+<div id="profileModal" role="dialog" aria-modal="true" aria-label="Edit Profile" class="fixed inset-0 z-50 hidden utility-overlay"><div class="utility-dialog compact"><button class="close-utility" aria-label="Close profile" onclick="hideUtility('profileModal')">✕</button><h2>Edit Profile</h2><form onsubmit="saveProfile(event)"><label>Display name<input id="profileName" maxlength="40" required autocomplete="nickname"></label><label>Avatar<input id="profileAvatar" maxlength="16" required aria-label="Profile avatar"></label><div id="avatarChoices" class="avatar-choices"></div><label>Subtitle / bio <span class="muted">Optional</span><input id="profileBio" maxlength="120" placeholder="Chief optimism officer"></label><button type="submit" class="primary">Save Profile</button></form></div></div>
+<div id="adminUserModal" role="dialog" aria-modal="true" aria-label="Manage teammate" class="fixed inset-0 z-50 hidden utility-overlay"><div class="utility-dialog compact"><button class="close-utility" aria-label="Close teammate editor" onclick="hideUtility('adminUserModal')">✕</button><h2>Manage teammate</h2><form onsubmit="saveAdminUser(event)"><label>Display name<input id="adminName" required maxlength="40"></label><label>Available energy (GW)<input id="adminBalance" required type="number" min="0" max="1000000000000" step="0.01"></label><p class="muted">Sets available energy only. Existing positions stay intact. Every adjustment is recorded in Power Audit.</p><button type="submit" class="primary">Save teammate</button></form></div></div>
+
   <script>
     /* ==========================================================================
        1. STORAGE KEYS & CORE APPLICATION STATE
        ========================================================================== */
     const STORAGE_KEY_SUPABASE = 'officebets_supabase_config_v8';
     // Optional public deployment defaults. NEVER use a service-role or secret key.
-    const DEPLOYMENT_CONFIG = {
+        const DEPLOYMENT_CONFIG = {
   url: 'https://yennoorczvfaygjmoubt.supabase.co',
   key: 'sb_publishable_iwze6p3IyUizAMntEFp-4A_IjPMQnGe'
-};
     let state = {categories:[], users:[], markets:[], transactions:[], activeCategory:'all'};
     let localActiveUserId = null;
     let currentMainTab = 'markets', searchQuery = '';
@@ -584,7 +592,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     let visibleQuote = null;
     let clientGeneration = 0;
     const nowServer = () => Date.now() + serverOffset;
-    const notifyError = err => { document.getElementById('appNotice').textContent = err.message || String(err); };
+    const notifyError = err => { clearTimeout(noticeTimer); document.getElementById('appNotice').textContent = err.message || String(err); };
     function config() {
       try { return JSON.parse(localStorage.getItem(STORAGE_KEY_SUPABASE)) || DEPLOYMENT_CONFIG; }
       catch { return DEPLOYMENT_CONFIG; }
@@ -779,6 +787,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         dot.className = 'w-2 h-2 rounded-full bg-gray-500 inline-block';
       }
       label.textContent = text;
+      document.getElementById('navSyncOptions').classList.toggle('hidden',connected);
     }
 
     function startMarketLifecycleTicker() {
@@ -898,11 +907,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       if (!market) return;
 
       const status = getMarketStatus(market);
-      if (status.code !== 'OPEN') {
-        alert(`This market is ${status.label}. Trading is halted.`);
-        return;
-      }
 
+      useAllTrade=false; detailData=null; detailRevision=-1; chartHidden.clear(); document.getElementById('oddsChart').textContent='Loading price history…'; document.getElementById('marketActivity').textContent='Loading activity…'; document.getElementById('chartReadout').textContent=''; document.getElementById('chartRange').value='all';
       activeTrade.marketId = marketId;
       activeTrade.outcomeIdx = outcomeIdx;
       activeTrade.mode = mode;
@@ -919,6 +925,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       recalculateTradePreview();
 
       document.getElementById('tradeModal').classList.remove('hidden');
+      renderPredictionDetails(); loadMarketDetails(true);
       lucide.createIcons();
     }
 
@@ -927,7 +934,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     }
 
     function setTradeMode(mode) {
-      activeTrade.mode = mode;
+      activeTrade.mode = mode; useAllTrade=false;
+      document.getElementById('tradeAmountInput').value='';
       const buyBtn = document.getElementById('toggleTradeModeBuy');
       const sellBtn = document.getElementById('toggleTradeModeSell');
       const label = document.getElementById('inputAmountLabel');
@@ -969,7 +977,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
             : 'bg-[#080b11] border-tesla-border text-gray-300 hover:border-gray-500'
         }`;
         btn.onclick = () => {
-          activeTrade.outcomeIdx = idx;
+          activeTrade.outcomeIdx = idx; useAllTrade=false; document.getElementById('tradeAmountInput').value='';
           renderTradeOutcomeButtons();
           updateTradeAvailableBalance();
           recalculateTradePreview();
@@ -1006,15 +1014,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     }
 
     function fillMaxTrade() {
-      const user = getActiveUser();
-      const input = document.getElementById('tradeAmountInput');
-      if (activeTrade.mode === 'buy') {
-        input.value = (Math.floor((user ? user.balance : 0) * 100) / 100).toFixed(2);
-      } else {
-        const shares = getUserOutcomeShares(user, activeTrade.marketId, activeTrade.outcomeIdx);
-        input.value = (Math.floor(shares * 1e10) / 1e10).toFixed(10);
-      }
-      recalculateTradePreview();
+      const user=getActiveUser();
+      const slip=user?.slips.find(p=>!p.settled && p.marketId===activeTrade.marketId && p.outcomeIdx===activeTrade.outcomeIdx);
+      document.getElementById('tradeAmountInput').value=activeTrade.mode==='buy'?(user?.balanceExact || '0'):(slip?.sharesExact || '0');
+      useAllTrade=true; recalculateTradePreview();
     }
 
     function recalculateTradePreview() {
@@ -1059,10 +1062,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       if (!market || market.resolved) return;
 
       const status = getMarketStatus(market);
-      if (status.code !== 'CLOSED') {
-        alert('This market can only be settled after trading closes.');
-        return;
-      }
+
 
       const creator = state.users.find(u => u.id === market.creatorId);
       const creatorName = creator ? creator.name : 'Unknown';
@@ -1198,7 +1198,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         tr.innerHTML = `
           <td class="py-3 px-3 text-gray-400 font-mono">#${idx + 1}</td>
           <td class="py-3 px-3 text-white font-sans font-bold flex items-center gap-2">
-            <span>${escapeHtml(u.name)}</span>
+            <span>${escapeHtml(u.avatar || "🏎️")}</span><div><span>${escapeHtml(u.name)}</span><p class="profile-bio">${escapeHtml(u.bio || "")}</p></div>
             ${u.id === localActiveUserId ? '<span class="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-tesla-voltage/20 text-tesla-voltage">YOU</span>' : ''}
           </td>
           <td class="py-3 px-3 text-gray-300 font-mono">${u.balance.toFixed(2)} GW</td>
@@ -1272,7 +1272,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       const container = document.getElementById('categoryFilterContainer');
       container.innerHTML = '';
 
-      // All Shift Channels Pill (Matches Screenshot Cyan Pill)
+      // All Channels Pill (Matches Screenshot Cyan Pill)
       const allBtn = document.createElement('button');
       const isAll = (state.activeCategory === 'all');
       allBtn.className = `px-3.5 py-1.5 rounded-xl text-xs font-bold transition ${
@@ -1280,7 +1280,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
           ? 'bg-tesla-voltage text-black glow-cyan' 
           : 'bg-[#0d121c] border border-tesla-border text-gray-300 hover:text-white'
       }`;
-      allBtn.textContent = 'All Shift Channels';
+      allBtn.textContent = 'All Channels';
       allBtn.onclick = () => filterCategory('all');
       container.appendChild(allBtn);
 
@@ -1328,7 +1328,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       }
 
       filtered.forEach(market => {
-        const cat = state.categories.find(c => c.id === market.categoryId) || { name: 'Supercharger Lounge' };
+        const cat = state.categories.find(c => c.id === market.categoryId) || { name: 'General' };
         const creator = state.users.find(u => u.id === market.creatorId);
         const reserves = market.outcomes.map(o => o.poolReserve);
         const probs = getImpliedProbabilities(reserves);
@@ -1338,7 +1338,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         const totalReserve = reserves.reduce((a, b) => a + b, 0);
 
         const card = document.createElement('div');
-        card.className = `rounded-2xl bg-tesla-card border ${market.resolved ? 'border-tesla-border/50 opacity-80' : 'border-tesla-border hover:border-gray-600'} p-5 flex flex-col justify-between transition shadow-xl`;
+        card.className = `prediction-card rounded-2xl bg-tesla-card border ${market.resolved ? 'border-tesla-border/50 opacity-80' : 'border-tesla-border hover:border-gray-600'} p-5 flex flex-col justify-between transition shadow-xl`;
 
         // Card Top (Matches Screenshot)
         let cardHtml = `
@@ -1348,14 +1348,12 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
                 ${escapeHtml(cat.name)}
               </span>
               <div class="flex items-center gap-1.5 text-gray-400 text-xs font-mono">
-                <span>🏎️</span>
-                <span>${creator ? escapeHtml(creator.name.charAt(0).toLowerCase()) : 'f'}</span>
+                <span>${escapeHtml(creator?.avatar || "🏎️")}</span>
+                <span>${creator ? escapeHtml(creator.name) : 'Former teammate'}</span>
               </div>
             </div>
             
-            <h3 class="text-base font-bold text-white leading-snug mb-1">
-              ${formatRichText(market.title)}
-            </h3>
+            <h3 class="text-base font-bold text-white leading-snug mb-1"><button class="market-title-button" onclick="openTradeModal('${market.id}',0)">${escapeHtml(market.title)}</button></h3>
             ${market.description ? `<p class="text-xs text-gray-400 mb-3">${formatRichText(market.description)}</p>` : '<div class="mb-3"></div>'}
           </div>
         `;
@@ -1396,26 +1394,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         });
         cardHtml += `</div>`;
 
-        // Card Footer Bar (Matches Screenshot: CPMM Reserve & Shift Settle)
-        cardHtml += `
-          <div class="pt-3 border-t border-tesla-border flex items-center justify-between">
-            <div class="text-xs font-mono text-gray-400">
-              Locked collateral: <span class="text-white font-bold">${market.collateralVault.toFixed(2)} GW</span>
-            </div>
-            ${!market.resolved ? (status.code === 'CLOSED' && (market.creatorId === localActiveUserId || user?.isAdmin) ? `
-              <button onclick="openSettleModal('${market.id}')" class="bg-[#2a1317] hover:bg-[#3d1a20] border border-tesla-red/40 text-[#f87171] hover:text-white text-xs font-bold px-3 py-1.5 rounded-lg transition flex items-center gap-1.5">
-                <span>Shift Settle</span>
-                <span>🏁</span>
-              </button>
-            ` : `
-              <div class="text-xs text-gray-500 font-mono">${status.code === 'OPEN' ? 'Closes ' + escapeHtml(new Date(market.closesAt).toLocaleString()) : 'Creator / admin settlement'}</div>
-            `) : `
-              <div class="text-xs text-emerald-400 font-mono font-bold flex items-center gap-1">
-                <span>Settled: ${escapeHtml(market.outcomes[market.winningOutcomeIdx]?.name || '')}</span>
-              </div>
-            `}
-          </div>
-        `;
+        cardHtml += `<div class="market-meta"><span>Locked Collateral <strong>${market.collateralVault.toFixed(2)} GW</strong></span><span title="${escapeHtmlAttr(new Date(market.closesAt).toLocaleString())}">Closing Time <strong>${escapeHtml(new Date(market.closesAt).toLocaleString(undefined,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}))}</strong></span></div>
+          <div class="market-actions"><button class="utility" onclick="openTradeModal('${market.id}',0)">View prediction ↗</button>${marketControls(market)}</div>`;
 
         card.innerHTML = cardHtml;
         grid.appendChild(card);
@@ -1463,9 +1443,15 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         const activeSlips = (user.slips || []).filter(s => !s.settled).length;
         document.getElementById('mySlipsCount').textContent = `(${activeSlips})`;
       } else {
-        heroName.textContent='Badge In to join the fun'; heroTag.textContent=''; heroBal.textContent='—'; heroPort.textContent='—';
+        heroName.textContent='Choose your badge'; heroTag.textContent=''; heroBal.textContent='—'; heroPort.textContent='—';
         document.getElementById('mySlipsCount').textContent='(0)';
       }
+      switcher.value=user?user.id:'';
+      document.getElementById('navBadgeIn').classList.toggle('hidden',!!user);
+      document.querySelector('#heroProfileButton span').textContent=user?'Edit Profile':'Badge In';
+      document.getElementById('heroAvatar').textContent=user?.avatar || '⚡';
+      document.getElementById('navAvatar').textContent=user?.avatar || '⚡';
+      document.getElementById('heroBio').textContent=user?.bio || '';
       renderBadgeOptions();
     }
 
@@ -1489,10 +1475,10 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         const btn = document.getElementById(`tabBtn-${t}`);
         if (t === tab) {
           el.classList.remove('hidden');
-          btn.className = 'px-4 py-2 rounded-lg bg-tesla-voltage text-black font-bold transition flex items-center gap-1.5';
+          if(btn) btn.className = 'px-4 py-2 rounded-lg bg-tesla-voltage text-black font-bold transition flex items-center gap-1.5';
         } else {
           el.classList.add('hidden');
-          btn.className = 'px-4 py-2 rounded-lg text-gray-400 hover:text-white transition flex items-center gap-1.5';
+          if(btn) btn.className = 'px-4 py-2 rounded-lg text-gray-400 hover:text-white transition flex items-center gap-1.5';
         }
       });
 
@@ -1523,6 +1509,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
        13. MODAL HANDLERS & SUPABASE CONFIG
        ========================================================================== */
     function openNewMarketModal() { 
+      editingMarket=null; document.querySelector('#newMarketModal h3 span').textContent='Create New Prediction'; document.querySelector('#newMarketModal button[type=submit]').textContent='Publish to Grid ⚡';
       if(!getActiveUser()) return openNewTeammateModal();
       const defaultDate = new Date(Date.now() + 4 * 60 * 60 * 1000);
       defaultDate.setMinutes(defaultDate.getMinutes() - defaultDate.getTimezoneOffset());
@@ -1531,7 +1518,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     }
     function closeNewMarketModal() { document.getElementById('newMarketModal').classList.add('hidden'); }
 
-    function openNewTeammateModal() { renderBadgeOptions(); document.getElementById('badgeError').textContent=''; document.getElementById('newTeammateModal').classList.remove('hidden'); }
+    function openNewTeammateModal() { renderBadgeOptions(); document.getElementById('badgeSelect').value=''; document.getElementById('badgeError').textContent=''; document.getElementById('newTeammateModal').classList.remove('hidden'); }
     function closeNewTeammateModal() { document.getElementById('newTeammateModal').classList.add('hidden'); }
 
     function openTransferModal() { if(!getActiveUser()) return openNewTeammateModal(); document.getElementById('transferModal').classList.remove('hidden'); }
@@ -1576,7 +1563,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       renderAll(); renderMarketsGrid(); renderPortfolio(); renderLeaderboard(); renderLedger(); renderCategoriesManager();
       document.querySelectorAll('form').forEach(form=>form.reset());
       for(const id of ['modalMarketTitle','modalMarketDesc','settleMarketTitle','modalOutcomeButtons','settleOptionsContainer','markdownLivePreview']) document.getElementById(id).textContent='';
-      document.getElementById('heroTeammateName').textContent = 'Badge In to join the fun';
+      document.getElementById('heroTeammateName').textContent = 'Choose your badge';
       document.getElementById('heroBalanceDisplay').textContent = '—';
       document.getElementById('heroPortfolioDisplay').textContent = '—';
       document.getElementById('heroTeammateTag').textContent = '';
@@ -1595,7 +1582,8 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       if (!state.categories.some(c=>c.id===oldCategory)) state.activeCategory = 'all';
       isCloudConnected = true;
       renderAll(); updatePendingUI();
-      updateSyncStatusUI(true, 'Connected · refreshes every 15s');
+      renderPredictionDetails(); loadMarketDetails();
+      updateSyncStatusUI(true, realtimeReady?'Connected · live updates':'Connected · auto-refresh');
     }
     async function refreshGrid() {
       if (!supabaseClient || polling || busy) return;
@@ -1617,13 +1605,13 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     function badgeKey() { return `officebets_badge_v9:${config().url}`; }
     function renderBadgeOptions() {
       const select=document.getElementById('badgeSelect');
-      const previous=select.value || localActiveUserId || '';
+      const previous=select.value || '';
       select.innerHTML='<option value="">Choose your badge</option>';
       for(const u of state.users.filter(u=>u.active)) {
         const option=document.createElement('option'); option.value=u.id; option.textContent=u.name;
         select.appendChild(option);
       }
-      select.value=previous;
+      select.value=state.users.some(u=>u.active && u.id===previous)?previous:'';
     }
     function switchTeammate(id) {
       try {
@@ -1647,12 +1635,13 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     async function connect() {
       const cfg=validConfig(config());
       if(!window.supabase) throw new Error('The database client did not load. Reload the page.');
+      if(supabaseClient) await supabaseClient.removeAllChannels();
       clientGeneration++; clearView();
       supabaseClient=window.supabase.createClient(cfg.url,cfg.key,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});
       localActiveUserId=localStorage.getItem(badgeKey());
       // A previous project's read may be finishing; wait for it before loading this project.
       while(polling) await new Promise(resolve=>setTimeout(resolve,50));
-      await refreshGrid(); updatePendingUI();
+      await refreshGrid(); updatePendingUI(); startRealtime();
     }
     async function boot() {
       renderAll(); startCooldownTicker(); startMarketLifecycleTicker();
@@ -1662,6 +1651,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         else notifyError(new Error('Start with Sync Options to connect your team database. See SETUP.md.'));
       } catch(err) { notifyError(err); }
       setInterval(() => { if (!document.hidden) refreshGrid(); },15000);
+      setInterval(()=>{if(!document.hidden && !document.getElementById('tradeModal').classList.contains('hidden')) refreshGrid();},3000);
       window.addEventListener('online',refreshGrid);
       document.addEventListener('visibilitychange',()=>{if(!document.hidden) refreshGrid();});
       document.addEventListener('keydown',e=>{if(e.key==='Escape') document.querySelectorAll('.fixed.inset-0.z-50').forEach(el=>el.classList.add('hidden'));});
@@ -1686,7 +1676,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         localActiveUserId=data.selectedUserId;
         applySnapshot(data); localStorage.removeItem(key);
         document.getElementById('newTeammateNameInput').value='';closeNewTeammateModal();updatePendingUI();
-        document.getElementById('appNotice').textContent='Badged in!';
+        showNotice('Badged in!');
       } catch(err) {errorEl.textContent=err.message || 'Connection interrupted. Try Badge In again with the same name.';}
       finally {busy=false;button.disabled=false;}
     }
@@ -1703,6 +1693,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
     async function clearSyncConfig() {
       if(busy) return notifyError(new Error('Wait for the current action to finish.'));
       clientGeneration++;
+      if(supabaseClient) await supabaseClient.removeAllChannels(); realtimeReady=false;
       supabaseClient=null; localStorage.removeItem(STORAGE_KEY_SUPABASE); clearView();
       notifyError(new Error('Disconnected. Reconnect using Sync Options.'));
     }
@@ -1742,7 +1733,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         localStorage.removeItem(key);
         if(generation!==clientGeneration || userId!==localActiveUserId) return false;
         applySnapshot(data);
-        document.getElementById('appNotice').textContent='Saved.';
+        showNotice('Saved.');
         succeeded=true;
       } catch(err) {
         notifyError(err);
@@ -1768,7 +1759,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
         const outcomes=type==='binary'?['YES','NO']:[...document.querySelectorAll('#categoricalOutcomesList .outcome-input-row input')].map(i=>i.value.trim()).filter(Boolean);
         const date=new Date(document.getElementById('newMarketClosesAtInput').value);
         if(!Number.isFinite(date.getTime())) throw new Error('Choose a valid closing time.');
-        if(await sendAction('create_market',{title:document.getElementById('newMarketTitleInput').value.trim(),description:document.getElementById('newMarketDescInput').value.trim(),category:document.getElementById('newMarketCategorySelect').value,closesAt:date.toISOString(),outcomes})) {
+        if(await sendAction(editingMarket?'edit_market':'create_market',{market:editingMarket,title:document.getElementById('newMarketTitleInput').value.trim(),description:document.getElementById('newMarketDescInput').value.trim(),category:document.getElementById('newMarketCategorySelect').value,closesAt:date.toISOString(),outcomes})) {
           e.target.reset(); toggleMarketTypeInputs('binary'); updateMarkdownPreviews(); closeNewMarketModal();
         }
       } catch(err) { notifyError(err); }
@@ -1778,7 +1769,7 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       if(await sendAction('add_category',{name:document.getElementById('newCategoryNameInput').value.trim()})) { e.target.reset(); renderCategoriesManager(); }
     }
     async function removeCategory(category) {
-      if(confirm('Remove this channel? Its markets will move to Supercharger Lounge.') && await sendAction('remove_category',{category})) renderCategoriesManager();
+      if(confirm('Remove this channel? Its markets will move to General.') && await sendAction('remove_category',{category})) renderCategoriesManager();
     }
     async function executeCurrentTrade() {
       const m=state.markets.find(m=>m.id===activeTrade.marketId);
@@ -1789,14 +1780,48 @@ Resources:`;for(let t of c){if(!t||typeof t!=`string`)throw Error(`@supabase/aut
       }
       const q=visibleQuote.output;
       if(!Number.isFinite(q) || q<=0) return notifyError(new Error('Amount is too small or liquidity is unavailable.'));
-      if(await sendAction(activeTrade.mode,{market:m.id,outcome:activeTrade.outcomeIdx,amount:document.getElementById('tradeAmountInput').value,minOut:Math.max(0,q*.99-1e-9)})) closeTradeModal();
+      if(await sendAction(activeTrade.mode,{market:m.id,outcome:activeTrade.outcomeIdx,amount:document.getElementById('tradeAmountInput').value,useAll:useAllTrade,minOut:Math.max(0,q*.99-1e-9)})) closeTradeModal();
       else recalculateTradePreview();
+    }
+    async function deletePrediction(marketId) {
+      const market=state.markets.find(m=>m.id===marketId); if(!market) return;
+      const refund=market.resolved?0:state.users.flatMap(u=>u.slips).filter(p=>p.marketId===marketId).reduce((v,p)=>v+p.wager,0);
+      const message=market.resolved?'This market has already paid out. No balances will change.':`Refund ${refund.toFixed(2)} GW of remaining stakes to their owners. Completed sales stay unchanged; unused house liquidity returns to the house.`;
+      if(confirm(`Delete “${market.title}” permanently? ${message} Its comments and price chart will also be removed. The audit record stays.`)) {
+        if(await sendAction('delete_market',{market:marketId})) {closeTradeModal();renderAdmin();}
+      }
     }
     async function executeSettlement(market,outcome) {
       const m=state.markets.find(m=>m.id===market);
-      if(m && confirm(`Settle “${m.title}” as “${m.outcomes[outcome].name}”? This cannot be undone.`))
+      if(m && confirm(`Settle “${m.title}” as “${m.outcomes[outcome].name}”? Trading ends immediately. This cannot be undone.`))
         if(await sendAction('settle',{market,outcome})) closeSettleModal();
     }
+
+    let noticeTimer, editingMarket=null, adminEditingUser=null, adminOriginalBalance='', useAllTrade=false;
+    let detailData=null, detailRevision=-1, detailBusy=false, realtimeReady=false;
+    let chartPoints=[],chartHidden=new Set();
+    const chartColors=['#22d3ee','#fb7185','#a78bfa','#fbbf24','#34d399','#f97316','#e879f9','#93c5fd'];
+    function showNotice(message){clearTimeout(noticeTimer);document.getElementById('appNotice').textContent=message;noticeTimer=setTimeout(()=>{document.getElementById('appNotice').textContent='';},4000);}
+    function hideUtility(id){document.getElementById(id).classList.add('hidden');}
+    function openProfile(){const u=getActiveUser();if(!u)return openNewTeammateModal();document.getElementById('profileName').value=u.name;document.getElementById('profileAvatar').value=u.avatar||'🏎️';document.getElementById('profileBio').value=u.bio||'';const list=document.getElementById('avatarChoices');list.innerHTML='';for(const emoji of ['🏎️','⚡','🚀','🦊','🐈','🦉','🌵','🎯','🧠','👑','🍀','🤖']){const b=document.createElement('button');b.type='button';b.textContent=emoji;b.setAttribute('aria-label','Use '+emoji+' avatar');b.onclick=()=>document.getElementById('profileAvatar').value=emoji;list.appendChild(b);}document.getElementById('profileModal').classList.remove('hidden');}
+    async function saveProfile(e){e.preventDefault();if(await sendAction('profile',{name:document.getElementById('profileName').value.trim(),avatar:document.getElementById('profileAvatar').value.trim(),bio:document.getElementById('profileBio').value.trim()}))hideUtility('profileModal');}
+    function openSettings(){renderAdmin();document.getElementById('settingsModal').classList.remove('hidden');}
+    function renderAdmin(){const host=document.getElementById('adminTools');if(!host)return;host.innerHTML='';if(!getActiveUser()?.isAdmin)return;host.innerHTML='<h3>Organizer tools</h3><p class="muted">Honor-system access, just like badges. User changes and refunds are recorded in Power Audit.</p><h3>Teammates</h3>';
+      for(const u of state.users){const row=document.createElement('div');row.className='admin-row';row.innerHTML=`<div>${escapeHtml(u.avatar||'🏎️')} <strong>${escapeHtml(u.name)}</strong><p class="muted">${u.balance.toFixed(2)} GW available · ${calculateUserPortfolioValue(u).toFixed(2)} GW estimated positions${u.isAdmin?' · Organizer':''}</p></div>`;const b=document.createElement('button');b.className='utility';b.textContent='Edit teammate';b.onclick=()=>openAdminUser(u.id);row.appendChild(b);host.appendChild(row);}
+      const h=document.createElement('h3');h.textContent='Delete predictions & refund';host.appendChild(h);
+      for(const m of state.markets){const row=document.createElement('div');row.className='admin-row';row.innerHTML=`<div><strong>${escapeHtml(m.title)}</strong><p class="muted">${m.resolved?'Resolved · no additional refunds':'Refund remaining stakes; retain completed sales'}</p></div>`;const b=document.createElement('button');b.className='utility danger';b.textContent='Delete';b.onclick=()=>deletePrediction(m.id);row.appendChild(b);host.appendChild(row);}
+    }
+    function openAdminUser(id){if(!getActiveUser()?.isAdmin)return;const u=state.users.find(x=>x.id===id);if(!u)return;adminEditingUser=id;document.getElementById('adminName').value=u.name;adminOriginalBalance=u.balance.toFixed(2);document.getElementById('adminBalance').value=adminOriginalBalance;hideUtility('settingsModal');document.getElementById('adminUserModal').classList.remove('hidden');}
+    async function saveAdminUser(e){e.preventDefault();const args={user:adminEditingUser,name:document.getElementById('adminName').value.trim()};const val=document.getElementById('adminBalance').value;if(val!==adminOriginalBalance)args.balance=val;if(await sendAction('admin_user',args)){hideUtility('adminUserModal');openSettings();}}
+    function marketControls(m){const u=getActiveUser();if(!u)return '';let html='';if(!m.resolved && (m.creatorId===u.id||u.isAdmin))html+=`<button class="utility" onclick="openSettleModal('${m.id}')">Resolve${getMarketStatus(m).code==='OPEN'?' early':''}</button>`;if(!m.resolved&&!m.everTraded&&m.creatorId===u.id)html+=`<button class="utility" onclick="editPrediction('${m.id}')">Edit prediction</button>`;if(u.isAdmin||(!m.resolved&&!m.everTraded&&m.creatorId===u.id))html+=`<button class="utility danger" onclick="deletePrediction('${m.id}')">Delete prediction</button>`;return html;}
+    function editPrediction(id){const m=state.markets.find(m=>m.id===id);if(!m||m.everTraded||m.resolved||m.creatorId!==localActiveUserId)return;closeTradeModal();openNewMarketModal();editingMarket=id;document.querySelector('#newMarketModal h3 span').textContent='Edit prediction';document.querySelector('#newMarketModal button[type=submit]').textContent='Save prediction';document.getElementById('newMarketTitleInput').value=m.title;document.getElementById('newMarketDescInput').value=m.description;document.getElementById('newMarketCategorySelect').value=m.categoryId;const d=new Date(m.closesAt);d.setMinutes(d.getMinutes()-d.getTimezoneOffset());document.getElementById('newMarketClosesAtInput').value=d.toISOString().slice(0,16);const binary=m.outcomes.length===2&&m.outcomes[0].name==='YES'&&m.outcomes[1].name==='NO';document.querySelector(`input[name=marketTypeRadio][value=${binary?'binary':'categorical'}]`).checked=true;toggleMarketTypeInputs(binary?'binary':'categorical');if(!binary){const list=document.getElementById('categoricalOutcomesList');list.querySelectorAll('.outcome-input-row').forEach(x=>x.remove());for(const o of m.outcomes){const row=document.createElement('div');row.className='flex gap-2 outcome-input-row';const input=document.createElement('input');input.type='text';input.maxLength=60;input.value=o.name;input.className='flex-1 bg-tesla-dark border border-tesla-border rounded-lg px-3 py-1.5 text-white';row.appendChild(input);list.insertBefore(row,list.lastElementChild);}}updateMarkdownPreviews();}
+    function renderPredictionDetails(){if(document.getElementById('tradeModal').classList.contains('hidden'))return;const m=state.markets.find(m=>m.id===activeTrade.marketId);if(!m){closeTradeModal();return;}const u=state.users.find(u=>u.id===m.creatorId);document.getElementById('modalMarketTitle').textContent=m.title;document.getElementById('modalMarketDesc').innerHTML=formatRichText(m.description||'');document.getElementById('modalCategoryBadge').textContent=state.categories.find(c=>c.id===m.categoryId)?.name||'General';document.getElementById('predictionByline').textContent=`By ${u?.name||'Former teammate'} · Closes ${new Date(m.closesAt).toLocaleString()}`;document.getElementById('predictionTools').innerHTML=marketControls(m);const status=getMarketStatus(m);document.getElementById('orderControls').classList.toggle('hidden',status.code!=='OPEN');document.getElementById('tradingStatus').textContent=m.resolved?`Resolved: ${m.outcomes[m.winningOutcomeIdx].name}`:status.code==='CLOSED'?'Trading closed. Awaiting creator or organizer resolution.':!getActiveUser()?'Choose your badge to trade.':'Each winning share pays 1 GW.';document.getElementById('activityLive').textContent=realtimeReady?'● Live':'Updates every 3s';}
+    async function loadMarketDetails(force=false){if(!supabaseClient||document.getElementById('tradeModal').classList.contains('hidden')||detailBusy||(!force&&detailRevision===revision))return;const id=activeTrade.marketId,generation=clientGeneration,rev=revision;detailBusy=true;try{const {data,error}=await supabaseClient.rpc('ob_market_view',{p_market:id}).abortSignal(AbortSignal.timeout(15000));if(error)throw error;if(generation!==clientGeneration||id!==activeTrade.marketId)return;detailData=data;detailRevision=rev;renderHistory();renderActivity();}catch(err){if(id===activeTrade.marketId)document.getElementById('chartNote').textContent='History unavailable. Check your connection and run the v10 upgrade SQL.';}finally{detailBusy=false;}}
+    function startRealtime(){realtimeReady=false;if(!supabaseClient)return;const generation=clientGeneration;supabaseClient.channel('officebets-updates').on('postgres_changes',{event:'UPDATE',schema:'public',table:'officebets_updates'},()=>{if(generation===clientGeneration)refreshGrid();}).subscribe(status=>{if(generation!==clientGeneration)return;realtimeReady=status==='SUBSCRIBED';renderPredictionDetails();});}
+    function renderActivity(){const host=document.getElementById('marketActivity'),previous=host.scrollTop;host.innerHTML='';for(const e of detailData?.activity||[]){const row=document.createElement('article');row.className='activity-entry'+(e.kind==='COMMENT'?' comment':'');row.innerHTML=`<div class="entry-meta"><strong>${escapeHtml(e.avatar)} ${escapeHtml(e.name)}</strong><time title="${escapeHtmlAttr(new Date(e.at).toLocaleString())}">${escapeHtml(new Date(e.at).toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'}))}</time></div><p>${escapeHtml(e.text)}</p>${e.kind==='COMMENT'?'':`<span class="muted">${escapeHtml(e.kind.replaceAll('_',' '))}${e.amount?` · ${e.amount>0?'+':''}${Number(e.amount).toFixed(2)} GW`:''}</span>`}`;host.appendChild(row);}if(!host.children.length)host.innerHTML='<p class="muted">No activity yet. Start the conversation.</p>';host.scrollTop=previous;}
+    async function postComment(e){e.preventDefault();const input=document.getElementById('commentBody'),text=input.value.trim();if(!getActiveUser())return openNewTeammateModal();if(await sendAction('comment',{market:activeTrade.marketId,body:text})){input.value='';await loadMarketDetails(true);}}
+    function renderHistory(){const m=state.markets.find(m=>m.id===activeTrade.marketId);if(!m)return;const all=detailData?.history||[],range=document.getElementById('chartRange').value,cutoff=range==='all'?-Infinity:nowServer()-Number(range)*3600000;chartPoints=all.filter(p=>new Date(p.at).getTime()>=cutoff);if(!chartPoints.length&&all.length)chartPoints=[all[all.length-1]];const legend=document.getElementById('chartLegend');legend.innerHTML='';m.outcomes.forEach((o,i)=>{const b=document.createElement('button');b.className='legend-button';b.textContent=o.name;b.style.color=chartColors[i];b.setAttribute('aria-pressed',String(!chartHidden.has(i)));b.onclick=()=>{if(chartHidden.has(i))chartHidden.delete(i);else chartHidden.add(i);renderHistory();};legend.appendChild(b);});document.getElementById('chartNote').textContent=all[0]?.kind==='UPGRADE'?'Recorded from this upgrade onward. Earlier odds were not stored.':'Hover, tap, or use the slider to explore. Click a legend to show/hide an outcome.';const host=document.getElementById('oddsChart');if(!chartPoints.length){host.innerHTML='<p class="muted">Loading price history…</p>';return;}const start=new Date(chartPoints[0].at).getTime(),end=Math.max(start+1,new Date(chartPoints.at(-1).at).getTime()),x=p=>44+(new Date(p.at).getTime()-start)/(end-start)*436,y=v=>210-v*184;let svg='<svg viewBox="0 0 500 250" role="img" aria-label="Historical outcome probabilities"><rect width="500" height="250" fill="transparent"/>';for(const v of [0,.25,.5,.75,1])svg+=`<line x1="44" x2="480" y1="${y(v)}" y2="${y(v)}" stroke="#213147"/><text x="2" y="${y(v)+4}" fill="#94a3b8" font-size="10">${v*100}%</text>`;m.outcomes.forEach((o,i)=>{if(chartHidden.has(i))return;const points=chartPoints.map(p=>`${x(p)},${y(p.odds[i]||0)}`).join(' ');svg+=`<polyline points="${points}" fill="none" stroke="${chartColors[i]}" stroke-width="2.5"/>`;const last=chartPoints.at(-1);svg+=`<circle cx="${x(last)}" cy="${y(last.odds[i]||0)}" r="4" fill="${chartColors[i]}"/>`;});svg+=`<line id="chartCursor" x1="480" x2="480" y1="20" y2="214" stroke="#e2e8f0" stroke-dasharray="3 4"/><text x="44" y="240" fill="#64748b" font-size="10">${escapeHtml(new Date(start).toLocaleString(undefined,{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}))}</text><text x="480" y="240" text-anchor="end" fill="#64748b" font-size="10">${escapeHtml(new Date(end).toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'}))}</text></svg>`;host.innerHTML=svg;const slider=document.getElementById('chartScrubber');slider.max=String(chartPoints.length-1);slider.value=slider.max;host.querySelector('svg').onpointermove=e=>{const rect=e.currentTarget.getBoundingClientRect();const target=start+Math.max(0,Math.min(1,((e.clientX-rect.left)/rect.width*500-44)/436))*(end-start);let best=0;chartPoints.forEach((p,i)=>{if(Math.abs(new Date(p.at).getTime()-target)<Math.abs(new Date(chartPoints[best].at).getTime()-target))best=i;});showHistoryPoint(best);};showHistoryPoint(chartPoints.length-1);}
+    function showHistoryPoint(index){const point=chartPoints[index],m=state.markets.find(m=>m.id===activeTrade.marketId);if(!point||!m)return;document.getElementById('chartScrubber').value=String(index);document.getElementById('chartReadout').innerHTML=`<div>${escapeHtml(new Date(point.at).toLocaleString())}</div>`+m.outcomes.map((o,i)=>chartHidden.has(i)?'':`<span style="color:${chartColors[i]}">${escapeHtml(o.name)} ${(100*(point.odds[i]||0)).toFixed(1)}%</span>`).join('');const first=new Date(chartPoints[0].at).getTime(),last=Math.max(first+1,new Date(chartPoints.at(-1).at).getTime()),x=44+(new Date(point.at).getTime()-first)/(last-first)*436;const cursor=document.getElementById('chartCursor');if(cursor){cursor.setAttribute('x1',String(x));cursor.setAttribute('x2',String(x));}}
 
     window.addEventListener('DOMContentLoaded', () => {
       boot();
