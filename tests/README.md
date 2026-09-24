@@ -9,7 +9,7 @@ The SQL checks were run with PGlite using a schema-only copy of the connected da
 
 ## Database rollout
 
-Apply `supabase/migrations/20260924025902_officebets_discovery_account_deletion.sql` before merging the UI. It is compatible with the currently deployed v10 page. **It has not been applied to production:** automatic approval review blocked the live migration pending explicit user approval of production changes. No production accounts were deleted.
+Applied to OfficeBets Supabase with explicit user approval on 2026-09-24. The committed filename `supabase/migrations/20260924062752_officebets_discovery_account_deletion.sql` matches the live migration-history version. Its SQL is unchanged from the tested migration. It is compatible with the currently deployed v10 page. No accounts were deleted; before/after counts and wallet totals were unchanged. Live snapshot/market-view calls, volume fields, first-trade flags, RLS and direct-table restrictions were verified. Security advisors show the same intentional badge-RPC warnings and private-table policy notices; performance advisors reported only unused-index information. The website has not been merged or deployed.
 
 The migration adds `markets.ever_traded` and extends the existing validated RPCs. RLS and direct-table restrictions remain intact. Existing security-advisor notices concern the intentional public honor-system RPCs and private tables without policies; this change does not replace badge access with authenticated identities.
 
