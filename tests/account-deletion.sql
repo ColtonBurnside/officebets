@@ -1,4 +1,4 @@
--- Run only against an isolated v10+ test database with the discovery migration.
+-- Run only against an isolated database with the verified-admin migrations.
 -- Synthetic fixtures and actions roll back. Never deletes a pre-existing badge.
 begin;
 do $$
@@ -7,9 +7,15 @@ declare
  admin_id uuid:=gen_random_uuid(); member_id uuid:=gen_random_uuid(); other_id uuid:=gen_random_uuid();
  market_id uuid; solo_id uuid; early_id uuid; request_id uuid:=gen_random_uuid(); result jsonb;
  before_vault numeric; before_reserves numeric[]; before_balance numeric; before_returned numeric;
+ auth_id uuid:=gen_random_uuid(); session_id uuid:=gen_random_uuid();
  deleted_balance numeric; other_shares numeric; before_volume numeric; r bigint;
 begin
  insert into officebets.members(id,name,is_admin) values(admin_id,'Test organizer '||left(admin_id::text,8),true);
+ insert into auth.users(id,email,email_confirmed_at) values(auth_id,'fixture-'||auth_id||'@example.test',clock_timestamp());
+ insert into auth.sessions(id,user_id) values(session_id,auth_id);
+ insert into officebets.admin_identities(member_id,auth_user_id) values(admin_id,auth_id);
+ perform set_config('request.jwt.claim.sub',auth_id::text,true);
+ perform set_config('request.jwt.claims',jsonb_build_object('session_id',session_id)::text,true);
  insert into officebets.members(id,name) values(member_id,'Delete fixture '||left(member_id::text,8)),(other_id,'Other fixture '||left(other_id::text,8));
  perform public.ob_action(gen_random_uuid(),member_id,'create_market',jsonb_build_object('title','Deletion fixture','description','','category','general','closesAt',clock_timestamp()+interval '1 day','outcomes',jsonb_build_array('YES','NO')));
  select id into market_id from officebets.markets where creator=member_id;
