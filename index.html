@@ -1602,7 +1602,7 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
     async function badgeOut() {
       try {
         if(busy || pendingAction()) throw new Error('Finish or retry your current action first.');
-        if(supabaseClient){const {error}=await supabaseClient.auth.signOut();if(error)throw error;}verifiedAdminId=null;
+        if(supabaseClient){const {error}=await supabaseClient.auth.signOut();if(error)throw error;}adminAuthorityGeneration++;verifiedAdminId=null;
         localStorage.removeItem(badgeKey()); localActiveUserId=null; visibleQuote=null;
         closeTradeModal();closeSettleModal();closeTransferModal();closeNewMarketModal();closeNewTeammateModal();
         renderAll(); updatePendingUI();
@@ -1615,7 +1615,7 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
       adminAuthSubscription?.unsubscribe();verifiedAdminId=null;featuredHistory.clear();featuredRequests.clear();
       clientGeneration++; clearView();
       supabaseClient=window.supabase.createClient(cfg.url,cfg.key,{auth:{persistSession:true,storage:sessionStorage,autoRefreshToken:true,detectSessionInUrl:true}});
-      adminAuthSubscription=supabaseClient.auth.onAuthStateChange(event=>{if(event==='SIGNED_OUT'){verifiedAdminId=null;renderAll();renderAdminAuthState();}else setTimeout(refreshAdminAuthority,0);}).data.subscription;
+      adminAuthSubscription=supabaseClient.auth.onAuthStateChange(event=>{adminAuthorityGeneration++;if(event==='SIGNED_OUT'){verifiedAdminId=null;renderAll();renderAdminAuthState();}else setTimeout(refreshAdminAuthority,0);}).data.subscription;
       localActiveUserId=localStorage.getItem(badgeKey());
       // A previous project's read may be finishing; wait for it before loading this project.
       while(polling) await new Promise(resolve=>setTimeout(resolve,50));
@@ -1871,20 +1871,20 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
 
     function openSettings(){renderAdmin();document.getElementById('settingsModal').classList.remove('hidden');}
     // Admin authority is issued by the backend for a verified Auth identity, never a selected badge alone.
-    let verifiedAdminId=null,adminAuthSubscription=null,profileViewingUser=null,marketMenuTrigger=null;
+    let verifiedAdminId=null,adminAuthorityGeneration=0,adminAuthSubscription=null,profileViewingUser=null,marketMenuTrigger=null;
     function canAdmin(){const u=getActiveUser();return !!u?.isAdmin&&verifiedAdminId===u.id;}
     function canManageOwnMarket(m){const u=getActiveUser();return !!u&&m.creatorId===u.id&&(!u.isAdmin||canAdmin());}
     async function refreshAdminAuthority(){
-      const client=supabaseClient,generation=clientGeneration;if(!client)return;
-      try{const {data,error}=await client.rpc('ob_admin_status');if(generation!==clientGeneration)return;verifiedAdminId=error?null:data?.memberId||null;}
-      catch{if(generation===clientGeneration)verifiedAdminId=null;}
-      if(generation===clientGeneration){renderAll();renderPredictionDetails();renderAdminAuthState();}
+      const client=supabaseClient,generation=clientGeneration,authorityGeneration=adminAuthorityGeneration;if(!client)return;
+      try{const {data,error}=await client.rpc('ob_admin_status');if(generation!==clientGeneration||authorityGeneration!==adminAuthorityGeneration)return;verifiedAdminId=error?null:data?.memberId||null;}
+      catch{if(generation===clientGeneration&&authorityGeneration===adminAuthorityGeneration)verifiedAdminId=null;}
+      if(generation===clientGeneration&&authorityGeneration===adminAuthorityGeneration){renderAll();renderPredictionDetails();renderAdminAuthState();}
     }
     function renderAdminAuthState(){const label=document.getElementById('adminAuthStatus');if(label)label.textContent=canAdmin()?'Admin access verified for this badge.':verifiedAdminId?'Select your linked admin badge to use admin tools.':'Sign in with your linked admin account. Badge selection alone does not grant admin access.';document.getElementById('adminSignOut').hidden=!verifiedAdminId;}
     function openAdminSignIn(){hideUtility('settingsModal');renderAdminAuthState();document.getElementById('adminAuthModal').classList.remove('hidden');}
     async function adminSignIn(e){e.preventDefault();const button=e.submitter;button.disabled=true;try{if(!supabaseClient)throw new Error('Connect to OfficeBets first.');const {error}=await supabaseClient.auth.signInWithPassword({email:document.getElementById('adminEmail').value.trim(),password:document.getElementById('adminPassword').value});if(error)throw error;document.getElementById('adminPassword').value='';await refreshAdminAuthority();if(verifiedAdminId){switchTeammate(verifiedAdminId);hideUtility('adminAuthModal');showNotice('Admin access verified.');}else document.getElementById('adminAuthStatus').textContent='Signed in. An existing admin must link this verified account to your badge before admin access is available.';}catch(err){document.getElementById('adminAuthStatus').textContent=err.message;}finally{button.disabled=false;}}
     async function registerAdminIdentity(){const button=document.getElementById('adminRegister');button.disabled=true;try{if(!supabaseClient)throw new Error('Connect to OfficeBets first.');const email=document.getElementById('adminEmail').value.trim(),password=document.getElementById('adminPassword').value;if(!email||password.length<12)throw new Error('Enter an email and a password of at least 12 characters.');const {error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:location.origin+location.pathname}});if(error)throw error;document.getElementById('adminPassword').value='';document.getElementById('adminAuthStatus').textContent='Check your email to confirm this sign-in account. Registration does not grant admin access; an existing admin must link your verified email to your badge.';}catch(err){document.getElementById('adminAuthStatus').textContent=err.message;}finally{button.disabled=false;}}
-    async function signOutAdmin(){if(busy||pendingAction())return notifyError(new Error('Finish or retry your pending action first.'));const {error}=await supabaseClient.auth.signOut();if(error)return notifyError(error);verifiedAdminId=null;renderAll();renderAdminAuthState();showNotice('Admin access locked.');}
+    async function signOutAdmin(){if(busy||pendingAction())return notifyError(new Error('Finish or retry your pending action first.'));const {error}=await supabaseClient.auth.signOut();if(error)return notifyError(error);adminAuthorityGeneration++;verifiedAdminId=null;renderAll();renderAdminAuthState();showNotice('Admin access locked.');}
     function marketActionOptions(m){const own=canManageOwnMarket(m),admin=canAdmin();if(!admin&&!own)return [];
       const actions=[];
       if(!m.persistentBetId&&!m.resolved&&!m.everTraded&&!m.closedPermanently)actions.push({label:'Edit prediction',run:()=>editPrediction(m.id)});

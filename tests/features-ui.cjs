@@ -64,7 +64,12 @@ const snapshot={revision:1,serverTime:new Date().toISOString(),users:[user(admin
  await page.reload();await page.waitForFunction(()=>state.markets.length===4&&canAdmin());
  authority=null;await page.evaluate(()=>refreshAdminAuthority());assert.equal(await page.evaluate(()=>canAdmin()),false);
  authority=admin;await page.evaluate(()=>refreshAdminAuthority());assert.equal(await page.evaluate(()=>canAdmin()),true);
+ await page.evaluate(()=>{window.finishAdminStatus=null;const originalRpc=supabaseClient.rpc.bind(supabaseClient);supabaseClient.rpc=(name,...args)=>name==='ob_admin_status'?new Promise(resolve=>{window.finishAdminStatus=()=>resolve({data:{memberId:localActiveUserId},error:null});}):originalRpc(name,...args);window.adminStatusDone=refreshAdminAuthority();});
+ await page.waitForFunction(()=>typeof window.finishAdminStatus==='function');
  await page.evaluate(()=>signOutAdmin());await page.waitForFunction(()=>!canAdmin());
+ await page.evaluate(()=>window.finishAdminStatus());
+ await page.evaluate(()=>window.adminStatusDone);
+ assert.equal(await page.evaluate(()=>canAdmin()),false,'A status response started before sign-out must not restore admin controls');
  await page.setViewportSize({width:390,height:844});await page.evaluate(()=>{hideUtility('profileModal');renderAll();});
  assert.equal(await page.locator('#sidebarNewPrediction').isVisible(),true);
  assert.equal(await page.locator('#persistentBets').isVisible(),true);
