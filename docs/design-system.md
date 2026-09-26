@@ -15,7 +15,7 @@ single-file deployment; new UI should use these tokens and the shared rendering 
 | Canvas / surface / raised / inset | `#0D1117` / `#161E28` / `#1A2532` / `#0B1017` |
 | Border / primary text / secondary text | `#2B3A4C` / `#F2F4F8` / `#B7C3D2` |
 | Primary cyan | **`#00F2FE`**: leading probability, energy, position, active channel, timeline and keyboard focus. Inactive categories, icons and borders stay neutral. |
-| Creation CTA | `#EF4444`, dark label; hover `#FF6868`. One primary New Prediction action. No glow. |
+| Creation CTA | One New Prediction action with a dark-red gradient, neon-red edge, white label, subtle depth, and restrained hover glow/lift. |
 | Destruction | Quiet `#FF9393` text; danger background `#351C24` only where useful. Separate from routine actions; confirmation required. Never use red for NO odds. |
 | Resolved result | `#63DFAE` plus a check and winning outcome, not color alone. |
 | Headings / body / numerical data | Gotham Medium / Gotham Book / JetBrains Mono; system and monospace fallbacks. Font files are not in the repository, so no unlicensed font downloads or claims of exact font fidelity. |

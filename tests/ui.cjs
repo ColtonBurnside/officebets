@@ -20,10 +20,10 @@ let snapshot={revision:1,serverTime:new Date().toISOString(),users:[admin,teamma
  assert.match(await page.locator('#featuredMarket h3').innerText(),/Prediction 8/);
  await page.click('#featuredNext');assert.match(await page.locator('#featuredMarket h3').innerText(),/Prediction 7/);
  await page.click('#featuredPrev');assert.match(await page.locator('#featuredMarket h3').innerText(),/Prediction 8/);
- await page.click('#featuredPrev');assert.match(await page.locator('#featuredMarket h3').innerText(),/Prediction 4/);
+ assert.equal(await page.locator('#featuredPrev').isDisabled(),true);
  assert.match(await page.locator('#endingSoon .ending-item').first().innerText(),/Prediction 1/);
  const rail=await page.locator('.workspace-sidebar').boundingBox(),content=await page.locator('.workspace-content').boundingBox();assert(rail.x>content.x+content.width);
- const newButton=await page.locator('#sidebarNewPrediction').boundingBox(),hero=await page.locator('#accountHero').boundingBox(),ending=await page.locator('.ending-panel').boundingBox();assert(newButton.y<hero.y&&hero.y<ending.y);
+ const newButton=await page.locator('#sidebarNewPrediction').boundingBox(),hero=await page.locator('#accountHero').boundingBox(),ending=await page.locator('.ending-panel').first().boundingBox();assert(newButton.y<hero.y&&hero.y<ending.y);
  await page.click('#navBadgeIn');assert.equal(await page.locator('#badgeSelect').inputValue(),'');await page.selectOption('#badgeSelect',admin.id);
  // Badge In dialog uses an explicit submit action.
  await page.evaluate(id=>switchTeammate(id),admin.id);
@@ -46,5 +46,5 @@ let snapshot={revision:1,serverTime:new Date().toISOString(),users:[admin,teamma
  await page.screenshot({path:process.env.SCREENSHOT_DIR?path.join(process.env.SCREENSHOT_DIR,'officebets-desktop.png'):'/tmp/officebets-desktop.png',fullPage:true});
  for(const width of [390,760,1024]){await page.setViewportSize({width,height:900});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`Page overflows at ${width}px`);assert.equal(await page.locator('#sidebarNewPrediction').isVisible(),true);assert.equal(await page.locator('#endingSoon').isVisible(),true);if(width===390)await page.screenshot({path:process.env.SCREENSHOT_DIR?path.join(process.env.SCREENSHOT_DIR,'officebets-mobile.png'):'/tmp/officebets-mobile.png',fullPage:true});}
  await page.evaluate(()=>{state.markets=[];renderAll();});assert.equal(await page.locator('#featuredDots button').count(),0);assert.equal(await page.locator('#featuredNext').isDisabled(),true);assert.match(await page.locator('#endingSoon').innerText(),/No open/);
- assert.deepEqual(errors,[]);await browser.close();console.log('PASS: layout, category rows, top-five ranking and wrap, ending soon, account menu, persistence, settings, confirmed deletion, search, tabs, responsive widths, empty states, whole-GW steps, card click/keyboard, admin early resolution and singleton chart');
+ assert.deepEqual(errors,[]);await browser.close();console.log('PASS: layout, category rows, top-five ranking and disabled edges, ending soon, account menu, persistence, settings, confirmed deletion, search, tabs, responsive widths, empty states, whole-GW steps, card click/keyboard, admin early resolution and singleton chart');
 })().catch(e=>{console.error(e);process.exit(1)});
