@@ -78,6 +78,15 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
 @media(max-width:760px){.workspace-columns{grid-template-columns:minmax(0,1fr)}.workspace-content,.workspace-sidebar{display:contents}#sidebarNewPrediction{grid-row:1;justify-self:end;width:auto;padding:0 18px}#topMarkets{grid-row:2}#accountHero{grid-row:3}#channelFilterRow{grid-row:4}#view-markets,#view-portfolio,#view-leaderboard,#view-ledger{grid-row:5}.ending-panel{grid-row:6}.workspace-sidebar>*+*{margin-top:0}.featured-panel{min-height:400px}.featured-market h3{font-size:25px}.category-row>.prediction-card{flex-basis:78%;max-width:390px}.prediction-card{padding:18px}.probability-value{font-size:36px}.row-edge{width:36px}header>div{padding-left:16px!important;padding-right:16px!important}header>div>div:last-child{gap:8px}#superchargeBtn{font-size:11px}#accountHero .flex-wrap{margin-top:12px}#accountHero>div:first-child>div:last-child{flex:1}.featured-body{margin:16px 0}#topMarkets .market-card-head{padding-right:20px}.hero-chart svg{height:145px}.featured-footer{padding-bottom:8px}.featured-navigation{justify-content:flex-start}.featured-navigation .carousel-dot{width:20px}.featured-navigation .carousel-dots{gap:5px}.market-close{font-size:11px}.utility-dialog{max-width:calc(100vw - 16px)}.row-edge:focus-visible{outline-offset:-3px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 
+</style><style>
+#sidebarNewPrediction{background:linear-gradient(145deg,#521018,#8c1926 48%,#4c0b13);border:1px solid #ff364f;color:#fff;box-shadow:inset 0 1px 0 #ff829055,0 4px 13px #16030766;transition:transform .18s,box-shadow .18s,filter .18s}
+#sidebarNewPrediction:hover{filter:brightness(1.12);transform:translateY(-2px);box-shadow:inset 0 1px 0 #ff9ca855,0 7px 20px #f1274940}
+#sidebarNewPrediction:active{transform:translateY(0)}
+.featured-panel>.row-edge{top:3px;bottom:46px}.featured-panel>.row-edge.prev{left:0}.featured-panel>.row-edge.next{right:0}
+.persistent-item{border-bottom:1px solid var(--ob-border);padding:13px 0}.persistent-item:last-child{border:0}.persistent-item strong{display:block;font-size:13px}.persistent-item small{display:block;color:var(--ob-muted);font-size:11px;margin-top:4px}.persistent-item-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.persistent-item-actions .utility{padding:5px 8px}
+.avatar-choices button.locked{filter:grayscale(1);opacity:.43;cursor:not-allowed}.avatar-choices button.locked:hover{background:transparent}
+@media(max-width:760px){.featured-panel>.row-edge{width:36px}.workspace-sidebar>.ending-panel:last-child{grid-row:7}}
+@media(prefers-reduced-motion:reduce){#sidebarNewPrediction{transition:none}#sidebarNewPrediction:hover{transform:none}}
 </style></head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-tesla-voltage selection:text-black">
 
@@ -173,9 +182,9 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
       <div class="workspace-content">
         <section id="topMarkets" class="featured-panel" aria-label="Featured predictions" aria-roledescription="carousel">
           <div class="section-heading"><div><span class="eyebrow">On the grid</span><span class="featured-tag">FEATURED</span></div></div>
-          <button id="featuredPrev" class="hero-edge" aria-label="Previous featured prediction" onclick="moveFeatured(-1)">‹</button>
+          <button id="featuredPrev" class="row-edge prev" aria-label="Previous featured prediction" onclick="moveFeatured(-1)">‹</button>
           <div id="featuredMarket" aria-live="off"></div>
-          <button id="featuredNext" class="hero-edge" aria-label="Next featured prediction" onclick="moveFeatured(1)">›</button>
+          <button id="featuredNext" class="row-edge next" aria-label="Next featured prediction" onclick="moveFeatured(1)">›</button>
           <div class="featured-navigation"><div id="featuredDots" class="carousel-dots" aria-label="Choose a featured prediction"></div><span id="featuredCount" class="font-mono"></span><button id="featuredPause" onclick="toggleFeaturedPlayback()" aria-label="Pause featured carousel">Ⅱ</button></div>
         </section>
     <!-- Channel / Category Selector (Matches Screenshot) -->
@@ -269,7 +278,7 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
 
       </div>
       <aside class="workspace-sidebar" aria-label="Your account and closing predictions">
-        <button onclick="openNewMarketModal()" id="sidebarNewPrediction" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold bg-tesla-red hover:bg-red-600 text-white transition shadow-lg glow-red">
+        <button onclick="openNewMarketModal()" id="sidebarNewPrediction" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-white transition">
           <span class="text-base font-bold leading-none">⊕</span>
           <span>New Prediction</span>
         </button>
@@ -280,6 +289,7 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
     </div>
 
         <section class="ending-panel" aria-labelledby="endingTitle"><div class="section-heading"><h2 id="endingTitle">Ending soon</h2><span aria-hidden="true">◷</span></div><div id="endingSoon"></div></section>
+        <section class="ending-panel" aria-labelledby="persistentTitle"><div class="section-heading"><h2 id="persistentTitle">Persistent Bets</h2><button id="persistentCreate" class="utility" onclick="openPersistentModal()" hidden>New</button></div><div id="persistentBets"></div></section>
       </aside>
     </div>
   </main>
@@ -384,18 +394,18 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
           <i data-lucide="plus-circle" class="w-4 h-4 text-tesla-red"></i>
           <span>Create New Prediction</span>
         </h3>
-        <p class="text-xs text-gray-400 mt-0.5">Free to create. The house supplies 200 GW of starting liquidity; your balance stays yours. Supports hyperlinks like <code class="text-tesla-voltage font-mono">[Thread](https://...)</code>.</p>
+        <p class="text-xs text-gray-400 mt-0.5">Add a link with <code class="text-tesla-voltage font-mono">[label](https://example.com)</code>.</p>
       </div>
 
       <form onsubmit="handleCreateMarketSubmit(event)" class="space-y-4 text-xs">
         <div>
           <label class="block text-gray-300 font-medium mb-1">Question / Subject</label>
-          <input type="text" maxlength="180" id="newMarketTitleInput" oninput="updateMarkdownPreviews()" required class="w-full bg-[#080b11] border border-tesla-border rounded-xl px-3 py-2 text-white focus:outline-none focus:border-tesla-voltage" placeholder="e.g. Will [Cybertruck Team](internal.chat/402) ship the OTA update tonight?">
+          <input type="text" maxlength="180" id="newMarketTitleInput" oninput="updateMarkdownPreviews()" required class="w-full bg-[#080b11] border border-tesla-border rounded-xl px-3 py-2 text-white focus:outline-none focus:border-tesla-voltage" placeholder="Will the team ship the update tonight?">
         </div>
 
         <div>
           <label class="block text-gray-300 font-medium mb-1">Resolution rule / source (recommended)</label>
-          <textarea maxlength="2000" id="newMarketDescInput" oninput="updateMarkdownPreviews()" rows="2" class="w-full bg-[#080b11] border border-tesla-border rounded-xl px-3 py-2 text-white focus:outline-none focus:border-tesla-voltage" placeholder="Reference tickets or notes: [See thread #491](https://chat.internal/491)"></textarea>
+          <textarea maxlength="2000" id="newMarketDescInput" oninput="updateMarkdownPreviews()" rows="2" class="w-full bg-[#080b11] border border-tesla-border rounded-xl px-3 py-2 text-white focus:outline-none focus:border-tesla-voltage" placeholder="Resolves YES if the update is live by 9 PM."></textarea>
         </div>
 
         <div class="p-2.5 rounded-xl bg-[#080b11] border border-tesla-border">
@@ -446,6 +456,23 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
         <button type="submit" class="w-full py-2.5 rounded-xl bg-tesla-red hover:bg-red-600 text-white font-bold transition shadow glow-red">
           Publish to Grid ⚡
         </button>
+      </form>
+    </div>
+  </div>
+
+  <div id="persistentModal" role="dialog" aria-modal="true" aria-label="Persistent bet" class="fixed inset-0 z-50 hidden utility-overlay">
+    <div class="utility-dialog compact"><button class="close-utility" onclick="hideUtility('persistentModal')" aria-label="Close dialog">✕</button>
+      <h2 id="persistentModalTitle">New Persistent Bet</h2>
+      <p class="muted">Instances open at 7:00 AM UTC. Times below use server time (UTC).</p>
+      <form onsubmit="savePersistentBet(event)">
+        <label>Question<input id="persistentQuestion" maxlength="180" required placeholder="Will the team finish its daily target?"></label>
+        <label>Resolution rule<input id="persistentRule" maxlength="2000" placeholder="Resolves YES if the target is complete by close."></label>
+        <label>Channel<select id="persistentCategory" required class="utility"></select></label>
+        <label>Outcomes (one per line)<textarea id="persistentOutcomes" rows="3" required class="w-full bg-[#050b13] border border-tesla-border rounded-lg p-2 text-white">YES&#10;NO</textarea></label>
+        <label>Repeat<select id="persistentCadence" onchange="document.getElementById('persistentWeekdayWrap').hidden=this.value!=='weekly'" class="utility"><option value="daily">Daily</option><option value="weekly">Weekly</option></select></label>
+        <label id="persistentWeekdayWrap" hidden>Closing weekday<select id="persistentWeekday" class="utility"><option value="0">Sunday</option><option value="1">Monday</option><option value="2">Tuesday</option><option value="3">Wednesday</option><option value="4">Thursday</option><option value="5">Friday</option><option value="6">Saturday</option></select></label>
+        <label>Closing time (UTC)<input id="persistentCloseTime" type="time" value="17:00" required></label>
+        <button class="primary" type="submit">Save Persistent Bet</button>
       </form>
     </div>
   </div>
@@ -841,6 +868,7 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
 
     function getMarketStatus(market) {
       if (market.resolved) return { code: 'SETTLED', label: 'Settled 🏁', color: 'emerald' };
+      if (market.closedPermanently) return { code: 'CLOSED', label: 'Trading Closed 🔒', color: 'amber' };
       const now = nowServer();
       const deadline = new Date(market.closesAt).getTime();
       if (!Number.isFinite(deadline) || now >= deadline) {
@@ -1070,21 +1098,16 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
       const market = state.markets.find(m => m.id === marketId);
       if (!market || market.resolved) return;
 
-      const status = getMarketStatus(market);
-
-
-      const creator = state.users.find(u => u.id === market.creatorId);
-      const creatorName = creator ? creator.name : 'Unknown';
-      const canResolve = canManageOwnMarket(market) || canAdmin();
+      const canResolve = canAdmin();
       if (!canResolve) {
-        alert(`Only the market creator (${creatorName}) or an admin can settle this prediction.`);
+        alert(`Only a verified admin can resolve this prediction.`);
         return;
       }
 
       document.getElementById('settleMarketTitle').innerHTML = formatRichText(market.title);
       const noticeEl = document.getElementById('settlePermissionsNotice');
 
-      noticeEl.innerHTML = `<span class="text-emerald-400 font-mono font-semibold">Settlement authority verified.</span> Select the winning outcome. This cannot be undone.`;
+      noticeEl.innerHTML = `<span class="text-emerald-400 font-mono font-semibold">Settlement authority verified.</span> Select the winning outcome. A verified admin can reverse it later with a full audit trail.`;
 
       const container = document.getElementById('settleOptionsContainer');
       container.innerHTML = '';
@@ -1580,7 +1603,7 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
       adminAuthSubscription?.unsubscribe();verifiedAdminId=null;featuredHistory.clear();featuredRequests.clear();
       clientGeneration++; clearView();
       supabaseClient=window.supabase.createClient(cfg.url,cfg.key,{auth:{persistSession:true,storage:sessionStorage,autoRefreshToken:true,detectSessionInUrl:true}});
-      adminAuthSubscription=supabaseClient.auth.onAuthStateChange(()=>{setTimeout(refreshAdminAuthority,0);}).data.subscription;
+      adminAuthSubscription=supabaseClient.auth.onAuthStateChange(event=>{if(event==='SIGNED_OUT'){verifiedAdminId=null;renderAll();renderAdminAuthState();}else setTimeout(refreshAdminAuthority,0);}).data.subscription;
       localActiveUserId=localStorage.getItem(badgeKey());
       // A previous project's read may be finishing; wait for it before loading this project.
       while(polling) await new Promise(resolve=>setTimeout(resolve,50));
@@ -1594,9 +1617,10 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
         else notifyError(new Error('Start with Sync Options to connect your team database. See SETUP.md.'));
       } catch(err) { notifyError(err); }
       setInterval(() => { if (!document.hidden) refreshGrid(); },15000);
+      setInterval(() => { if (!document.hidden && verifiedAdminId) refreshAdminAuthority(); },30000);
       setInterval(()=>{if(!document.hidden && !document.getElementById('tradeModal').classList.contains('hidden')) refreshGrid();},3000);
       window.addEventListener('online',refreshGrid);
-      document.addEventListener('visibilitychange',()=>{if(!document.hidden) refreshGrid();});
+      document.addEventListener('visibilitychange',()=>{if(!document.hidden){refreshGrid();refreshAdminAuthority();}});
       document.addEventListener('keydown',e=>{if(e.key==='Escape') document.querySelectorAll('.fixed.inset-0.z-50').forEach(el=>el.classList.add('hidden'));});
     }
     async function handleCreateTeammateSubmit(e) {
@@ -1735,9 +1759,17 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
         if(await sendAction('delete_market',{market:marketId})) {closeTradeModal();renderAdmin();}
       }
     }
+    async function closePredictionEarly(marketId){const market=state.markets.find(m=>m.id===marketId);if(!market||market.resolved||market.closedPermanently||getMarketStatus(market).code!=='OPEN'||(!canManageOwnMarket(market)&&!canAdmin()))return;
+      if(confirm(`Close “${market.title}” now? This immediately stops new bets, preserves existing bets, leaves the prediction unresolved, and can never reopen betting.`))
+        if(await sendAction('close_market',{market:marketId}))showNotice('Prediction closed. Existing bets remain awaiting resolution.');
+    }
+    async function reverseResolution(marketId){const market=state.markets.find(m=>m.id===marketId);if(!canAdmin()||!market?.resolved)return;
+      if(confirm(`Reverse the resolution of “${market.title}”? Compensating ledger entries will exactly undo its payouts and house return. Balances may become negative. Betting stays closed and the audit history remains.`))
+        if(await sendAction('reverse_resolution',{market:marketId}))showNotice('Resolution reversed. Betting remains closed.');
+    }
     async function executeSettlement(market,outcome) {
       const m=state.markets.find(m=>m.id===market);
-      if(m && confirm(`Settle “${m.title}” as “${m.outcomes[outcome].name}”? Trading ends immediately. This cannot be undone.`))
+      if(m && confirm(`Resolve “${m.title}” as “${m.outcomes[outcome].name}”? Trading ends immediately. A reversal requires a verified admin and creates compensating audit entries.`))
         if(await sendAction('settle',{market,outcome})) closeSettleModal();
     }
 
@@ -1747,7 +1779,7 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
     const chartColors=['#00f2fe','#b7c3d2','#a78bfa','#fbbf24','#34d399','#f97316','#e879f9','#93c5fd'];
     function showNotice(message){clearTimeout(noticeTimer);document.getElementById('appNotice').textContent=message;noticeTimer=setTimeout(()=>{document.getElementById('appNotice').textContent='';},4000);}
     function hideUtility(id){document.getElementById(id).classList.add('hidden');}
-    function openProfile(){const u=getActiveUser();if(!u)return openNewTeammateModal();document.getElementById('profileName').value=u.name;document.getElementById('profileAvatar').value=u.avatar||'🏎️';document.getElementById('profileBio').value=u.bio||'';const list=document.getElementById('avatarChoices');list.innerHTML='';for(const emoji of ['🏎️','⚡','🚀','🦊','🐈','🦉','🌵','🎯','🧠','👑','🍀','🤖']){const b=document.createElement('button');b.type='button';b.textContent=emoji;b.setAttribute('aria-label','Use '+emoji+' avatar');b.onclick=()=>document.getElementById('profileAvatar').value=emoji;list.appendChild(b);}document.getElementById('profileModal').classList.remove('hidden');}
+    function openProfile(){const u=getActiveUser();if(!u)return openNewTeammateModal();document.getElementById('profileName').value=u.name;document.getElementById('profileAvatar').value=u.avatar||'🏎️';document.getElementById('profileBio').value=u.bio||'';const list=document.getElementById('avatarChoices');list.innerHTML='';for(const emoji of ['🏎️','⚡','🚀','🦊','🐈','🦉','🌵','🎯','🧠','👑','🍀','🤖']){const b=document.createElement('button');b.type='button';b.textContent=emoji;b.setAttribute('aria-label','Use '+emoji+' avatar');b.onclick=()=>document.getElementById('profileAvatar').value=emoji;list.appendChild(b);}for(const icon of [{name:'Loan Shark',emoji:'🦈',key:'loan_shark'},{name:'Master Better',emoji:'🎰',key:'master_better'},{name:'Biggest Loser',emoji:'💀',key:'biggest_loser'},{name:'How Did We Get Here?',emoji:'⁉️',key:'how_did_we_get_here'}]){const b=document.createElement('button');b.type='button';b.textContent=icon.emoji;b.title=icon.name;b.setAttribute('aria-label',icon.name);const unlocked=(u.achievements||[]).includes(icon.key);b.disabled=!unlocked;b.classList.toggle('locked',!unlocked);if(unlocked)b.onclick=()=>document.getElementById('profileAvatar').value=icon.emoji;list.appendChild(b);}document.getElementById('profileModal').classList.remove('hidden');}
     async function saveProfile(e){e.preventDefault();if(await sendAction('profile',{name:document.getElementById('profileName').value.trim(),avatar:document.getElementById('profileAvatar').value.trim(),bio:document.getElementById('profileBio').value.trim()}))hideUtility('profileModal');}
 
     function closeAccountMenu(){document.getElementById('accountMenu').open=false;}
@@ -1759,12 +1791,13 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
     function pauseFeatured(){featuredPaused=true;featuredElapsed=0;updateFeaturedPlayback();}
     function updateFeaturedPlayback(){const b=document.getElementById('featuredPause');if(!b)return;b.disabled=topVolumeMarkets().length<2;b.textContent=featuredPaused?'▶':'Ⅱ';b.setAttribute('aria-label',featuredPaused?'Play featured carousel':'Pause featured carousel');b.setAttribute('aria-pressed',String(featuredPaused));document.getElementById('featuredMarket').setAttribute('aria-live',featuredPaused?'polite':'off');}
     function toggleFeaturedPlayback(){featuredPaused=!featuredPaused;featuredElapsed=0;updateFeaturedPlayback();}
-    function moveFeatured(direction,automatic=false){if(!automatic)pauseFeatured();const markets=topVolumeMarkets();if(!markets.length)return;const current=Math.max(0,markets.findIndex(m=>m.id===featuredMarketId));featuredMarketId=markets[(current+direction+markets.length)%markets.length].id;featuredElapsed=0;renderFeatured();}
+    function moveFeatured(direction,automatic=false){if(!automatic)pauseFeatured();const markets=topVolumeMarkets();if(!markets.length)return;const current=Math.max(0,markets.findIndex(m=>m.id===featuredMarketId));const next=automatic?(current+direction+markets.length)%markets.length:Math.max(0,Math.min(markets.length-1,current+direction));featuredMarketId=markets[next].id;featuredElapsed=0;renderFeatured();}
     function renderFeatured(){
       const markets=topVolumeMarkets(),host=document.getElementById('featuredMarket'),dots=document.getElementById('featuredDots');
       if(!markets.some(m=>m.id===featuredMarketId))featuredMarketId=markets[0]?.id||null;
       const m=markets.find(m=>m.id===featuredMarketId);dots.innerHTML='';
-      for(const id of ['featuredPrev','featuredNext'])document.getElementById(id).disabled=markets.length<2;
+      document.getElementById('featuredPrev').disabled=!m||markets.indexOf(m)===0;
+      document.getElementById('featuredNext').disabled=!m||markets.indexOf(m)===markets.length-1;
       document.getElementById('featuredCount').textContent=m?`${markets.indexOf(m)+1} / ${markets.length}`:'';updateFeaturedPlayback();
       if(!m){host.innerHTML='<p class="discovery-empty muted">No active predictions yet.</p>';return;}
       const category=state.categories.find(c=>c.id===m.categoryId);
@@ -1808,7 +1841,15 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
       const markets=state.markets.filter(m=>getMarketStatus(m).code==='OPEN').sort((a,b)=>new Date(a.closesAt)-new Date(b.closesAt)||a.id.localeCompare(b.id)).slice(0,5);
       for(const market of markets){const button=document.createElement('button');button.className='ending-item';button.onclick=()=>openTradeModal(market.id,0);const title=document.createElement('strong');title.textContent=market.title;const time=document.createElement('time');time.dateTime=market.closesAt;time.textContent=new Date(market.closesAt).toLocaleString(undefined,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});button.append(title,time);host.appendChild(button);}
       if(!markets.length)host.innerHTML='<p class="muted discovery-empty">No open predictions ending soon.</p>';
+      renderPersistentBets();
     }
+    let editingPersistentBet=null;
+    function renderPersistentBets(){const host=document.getElementById('persistentBets');host.innerHTML='';document.getElementById('persistentCreate').hidden=!canAdmin()||(state.persistentBets||[]).length>=3;
+      for(const d of state.persistentBets||[]){const row=document.createElement('div');row.className='persistent-item';const title=document.createElement('strong');title.textContent=d.title;row.appendChild(title);const schedule=document.createElement('small');schedule.textContent=d.cadence==='daily'?`Daily · closes ${String(d.closeTime).slice(0,5)} UTC`:`Weekly · closes ${['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][d.weekday]} ${String(d.closeTime).slice(0,5)} UTC`;row.appendChild(schedule);const current=state.markets.filter(m=>m.persistentBetId===d.id&&getMarketStatus(m).code==='OPEN').sort((a,b)=>new Date(b.opensAt)-new Date(a.opensAt))[0];if(current){const open=document.createElement('button');open.className='utility';open.textContent='Open current prediction';open.onclick=()=>openTradeModal(current.id,0);row.appendChild(open);}if(canAdmin()){const actions=document.createElement('div');actions.className='persistent-item-actions';const edit=document.createElement('button');edit.className='utility';edit.textContent='Edit future';edit.onclick=()=>openPersistentModal(d.id);const remove=document.createElement('button');remove.className='utility danger';remove.textContent='Retire';remove.onclick=()=>retirePersistentBet(d.id);actions.append(edit,remove);row.appendChild(actions);}host.appendChild(row);}if(!host.children.length)host.innerHTML='<p class="muted discovery-empty">No active persistent bets.</p>';
+    }
+    function openPersistentModal(id=null){if(!canAdmin())return;const d=(state.persistentBets||[]).find(x=>x.id===id);editingPersistentBet=d?.id||null;document.getElementById('persistentModalTitle').textContent=d?'Edit Persistent Bet':'New Persistent Bet';document.getElementById('persistentQuestion').value=d?.title||'';document.getElementById('persistentRule').value=d?.description||'';document.getElementById('persistentOutcomes').value=(d?.outcomes||['YES','NO']).join('\n');document.getElementById('persistentCadence').value=d?.cadence||'daily';document.getElementById('persistentWeekday').value=String(d?.weekday??0);document.getElementById('persistentWeekdayWrap').hidden=(d?.cadence||'daily')!=='weekly';document.getElementById('persistentCloseTime').value=String(d?.closeTime||'17:00').slice(0,5);const select=document.getElementById('persistentCategory');select.innerHTML='';for(const c of state.categories){const option=document.createElement('option');option.value=c.id;option.textContent=c.name;select.appendChild(option);}select.value=d?.categoryId||state.categories[0]?.id||'';document.getElementById('persistentModal').classList.remove('hidden');}
+    async function savePersistentBet(e){e.preventDefault();if(!canAdmin())return;const cadence=document.getElementById('persistentCadence').value;const args={title:document.getElementById('persistentQuestion').value.trim(),description:document.getElementById('persistentRule').value.trim(),category:document.getElementById('persistentCategory').value,outcomes:document.getElementById('persistentOutcomes').value.split('\n').map(x=>x.trim()).filter(Boolean),cadence,weekday:cadence==='weekly'?Number(document.getElementById('persistentWeekday').value):null,closeTime:document.getElementById('persistentCloseTime').value+':00+00'};if(editingPersistentBet)args.definition=editingPersistentBet;if(await sendAction(editingPersistentBet?'edit_persistent':'create_persistent',args))hideUtility('persistentModal');}
+    async function retirePersistentBet(id){const d=(state.persistentBets||[]).find(x=>x.id===id);if(!canAdmin()||!d)return;if(confirm(`Retire “${d.title}”? Its current instance closes now, existing bets and history remain, and no future instances will open.`))await sendAction('delete_persistent',{definition:id});}
     async function deleteAccount(id){
       const user=state.users.find(u=>u.id===id);if(!canAdmin()||!user||id===localActiveUserId)return;
       const confirmation=prompt(`Permanently delete ${user.name}? Their badge, comments and positions will be removed; unused GW returns to the house. Their predictions transfer to you. Market prices, other players and audit history are preserved. This cannot be undone.\n\nType the badge name to confirm:`);
@@ -1834,13 +1875,14 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
     async function signOutAdmin(){if(busy||pendingAction())return notifyError(new Error('Finish or retry your pending action first.'));const {error}=await supabaseClient.auth.signOut();if(error)return notifyError(error);verifiedAdminId=null;renderAll();renderAdminAuthState();showNotice('Admin access locked.');}
     function marketActionOptions(m){const own=canManageOwnMarket(m),admin=canAdmin();if(!admin&&!own)return [];
       const actions=[];
-      if(!m.resolved&&!m.everTraded)actions.push({label:'Edit prediction',run:()=>editPrediction(m.id)});
-      else if(admin)actions.push({label:'Edit locked after trade / resolution',disabled:true});
-      if(!m.resolved)actions.push({label:getMarketStatus(m).code==='OPEN'?'Resolve early':'Resolve',run:()=>openSettleModal(m.id)});
-      if(admin||(!m.resolved&&!m.everTraded))actions.push({label:'Delete prediction',danger:true,run:()=>deletePrediction(m.id)});
+      if(!m.persistentBetId&&!m.resolved&&!m.everTraded&&!m.closedPermanently)actions.push({label:'Edit prediction',run:()=>editPrediction(m.id)});
+      if(!m.resolved&&!m.closedPermanently&&getMarketStatus(m).code==='OPEN')actions.push({label:'Close prediction early',danger:true,run:()=>closePredictionEarly(m.id)});
+      if(admin&&!m.resolved)actions.push({label:getMarketStatus(m).code==='OPEN'?'Resolve early':'Resolve prediction',run:()=>openSettleModal(m.id)});
+      if(admin&&m.resolved)actions.push({label:'Reverse resolution',danger:true,run:()=>reverseResolution(m.id)});
+      if(admin&&!m.persistentBetId)actions.push({label:'Delete prediction',danger:true,run:()=>deletePrediction(m.id)});
       return actions;
     }
-    function marketControls(m,detail=false){return (canAdmin()||detail)&&marketActionOptions(m).length?`<button class="market-overflow-trigger" aria-label="Manage prediction: ${escapeHtmlAttr(m.title)}" aria-haspopup="menu" aria-expanded="false" onclick="openMarketMenu(event,'${m.id}')">⋯</button>`:'';}
+    function marketControls(m){return marketActionOptions(m).some(action=>!action.disabled)?`<button class="market-overflow-trigger" aria-label="Manage prediction: ${escapeHtmlAttr(m.title)}" aria-haspopup="menu" aria-expanded="false" onclick="openMarketMenu(event,'${m.id}')">⋯</button>`:'';}
     function closeMarketMenu(restore=false){document.getElementById('marketOverflow').hidden=true;if(marketMenuTrigger){marketMenuTrigger.setAttribute('aria-expanded','false');if(restore&&marketMenuTrigger.isConnected)marketMenuTrigger.focus();}marketMenuTrigger=null;}
     function openMarketMenu(e,id){e.stopPropagation();const m=state.markets.find(m=>m.id===id);if(!m)return;const trigger=e.currentTarget;if(marketMenuTrigger===trigger)return closeMarketMenu(true);closeMarketMenu();marketMenuTrigger=trigger;trigger.setAttribute('aria-expanded','true');const menu=document.getElementById('marketOverflow');menu.innerHTML='';
       for(const action of marketActionOptions(m)){const b=document.createElement('button');b.role='menuitem';b.textContent=action.label;b.disabled=!!action.disabled;if(action.danger)b.className='danger';b.onclick=()=>{closeMarketMenu();action.run?.();};menu.appendChild(b);}
@@ -1860,7 +1902,7 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
     async function saveAdminUser(e){e.preventDefault();if(!canAdmin())return;const args={user:adminEditingUser,name:document.getElementById('adminName').value.trim(),avatar:document.getElementById('adminAvatar').value.trim(),bio:document.getElementById('adminBio').value.trim()};const val=document.getElementById('adminBalance').value;if(val!==adminOriginalBalance)args.balance=val;if(await sendAction('admin_user',args)){hideUtility('adminUserModal');openSettings();}}
     async function changeAdminRole(){const target=state.users.find(u=>u.id===adminEditingUser);if(!canAdmin()||!target||target.id===localActiveUserId)return;const grant=!target.isAdmin,email=document.getElementById('adminRoleEmail').value.trim();if(grant&&!email)return notifyError(new Error('Enter the teammate’s confirmed sign-in email.'));if(!confirm(`${grant?'Grant admin access to':'Revoke admin access from'} ${target.name}${grant?' ('+email+')':''}? ${grant?'They will be able to manage profiles, predictions and other admins.':'Their next privileged request will be denied.'}`))return;const button=document.getElementById('adminRoleButton');button.disabled=true;try{if(await sendAction('admin_role',{user:target.id,grant,email,confirmName:target.name})){hideUtility('adminUserModal');await refreshAdminAuthority();openSettings();}}finally{button.disabled=false;}}
 
-    function editPrediction(id){const m=state.markets.find(m=>m.id===id);if(!m||m.everTraded||m.resolved||(!canManageOwnMarket(m)&&!canAdmin()))return;closeTradeModal();hideUtility('settingsModal');openNewMarketModal();editingMarket=id;document.querySelector('#newMarketModal h3 span').textContent='Edit prediction';document.querySelector('#newMarketModal button[type=submit]').textContent='Save prediction';document.getElementById('newMarketTitleInput').value=m.title;document.getElementById('newMarketDescInput').value=m.description;document.getElementById('newMarketCategorySelect').value=m.categoryId;const d=new Date(m.closesAt);d.setMinutes(d.getMinutes()-d.getTimezoneOffset());document.getElementById('newMarketClosesAtInput').value=d.toISOString().slice(0,16);const binary=m.outcomes.length===2&&m.outcomes[0].name==='YES'&&m.outcomes[1].name==='NO';document.querySelector(`input[name=marketTypeRadio][value=${binary?'binary':'categorical'}]`).checked=true;toggleMarketTypeInputs(binary?'binary':'categorical');if(!binary){const list=document.getElementById('categoricalOutcomesList');list.querySelectorAll('.outcome-input-row').forEach(x=>x.remove());for(const o of m.outcomes){const row=document.createElement('div');row.className='flex gap-2 outcome-input-row';const input=document.createElement('input');input.type='text';input.maxLength=60;input.value=o.name;input.className='flex-1 bg-tesla-dark border border-tesla-border rounded-lg px-3 py-1.5 text-white';row.appendChild(input);list.insertBefore(row,list.lastElementChild);}}updateMarkdownPreviews();}
+    function editPrediction(id){const m=state.markets.find(m=>m.id===id);if(!m||m.everTraded||m.resolved||m.closedPermanently||m.persistentBetId||(!canManageOwnMarket(m)&&!canAdmin()))return;closeTradeModal();hideUtility('settingsModal');openNewMarketModal();editingMarket=id;document.querySelector('#newMarketModal h3 span').textContent='Edit prediction';document.querySelector('#newMarketModal button[type=submit]').textContent='Save prediction';document.getElementById('newMarketTitleInput').value=m.title;document.getElementById('newMarketDescInput').value=m.description;document.getElementById('newMarketCategorySelect').value=m.categoryId;const d=new Date(m.closesAt);d.setMinutes(d.getMinutes()-d.getTimezoneOffset());document.getElementById('newMarketClosesAtInput').value=d.toISOString().slice(0,16);const binary=m.outcomes.length===2&&m.outcomes[0].name==='YES'&&m.outcomes[1].name==='NO';document.querySelector(`input[name=marketTypeRadio][value=${binary?'binary':'categorical'}]`).checked=true;toggleMarketTypeInputs(binary?'binary':'categorical');if(!binary){const list=document.getElementById('categoricalOutcomesList');list.querySelectorAll('.outcome-input-row').forEach(x=>x.remove());for(const o of m.outcomes){const row=document.createElement('div');row.className='flex gap-2 outcome-input-row';const input=document.createElement('input');input.type='text';input.maxLength=60;input.value=o.name;input.className='flex-1 bg-tesla-dark border border-tesla-border rounded-lg px-3 py-1.5 text-white';row.appendChild(input);list.insertBefore(row,list.lastElementChild);}}updateMarkdownPreviews();}
     function renderPredictionDetails(){if(document.getElementById('tradeModal').classList.contains('hidden'))return;const m=state.markets.find(m=>m.id===activeTrade.marketId);if(!m){closeTradeModal();return;}const u=state.users.find(u=>u.id===m.creatorId);document.getElementById('modalMarketTitle').textContent=m.title;document.getElementById('modalMarketDesc').innerHTML=formatRichText(m.description||'');document.getElementById('modalCategoryBadge').textContent=state.categories.find(c=>c.id===m.categoryId)?.name||'General';document.getElementById('predictionByline').textContent=`By ${u?.name||'Former teammate'} · Closes ${new Date(m.closesAt).toLocaleString()}`;document.getElementById('predictionTools').innerHTML=marketControls(m,true);const status=getMarketStatus(m);document.getElementById('orderControls').classList.toggle('hidden',status.code!=='OPEN');document.getElementById('tradingStatus').textContent=m.resolved?`Resolved: ${m.outcomes[m.winningOutcomeIdx].name}`:status.code==='CLOSED'?'Trading closed. Awaiting creator or organizer resolution.':!getActiveUser()?'Choose your badge to trade.':'Each winning share pays 1 GW.';document.getElementById('activityLive').textContent=realtimeReady?'● Live':'Updates every 3s';}
     async function loadMarketDetails(force=false){if(!supabaseClient||document.getElementById('tradeModal').classList.contains('hidden')||detailBusy||(!force&&detailRevision===revision))return;const id=activeTrade.marketId,generation=clientGeneration,rev=revision;detailBusy=true;try{const {data,error}=await supabaseClient.rpc('ob_market_view',{p_market:id}).abortSignal(AbortSignal.timeout(15000));if(error)throw error;if(generation!==clientGeneration||id!==activeTrade.marketId)return;detailData=data;detailRevision=rev;renderHistory();renderActivity();}catch(err){if(id===activeTrade.marketId)document.getElementById('chartNote').textContent='History unavailable. Check your connection and run the v10 upgrade SQL.';}finally{detailBusy=false;}}
     function startRealtime(){realtimeReady=false;if(!supabaseClient)return;const generation=clientGeneration;supabaseClient.channel('officebets-updates').on('postgres_changes',{event:'UPDATE',schema:'public',table:'officebets_updates'},()=>{if(generation===clientGeneration)refreshGrid();}).subscribe(status=>{if(generation!==clientGeneration)return;realtimeReady=status==='SUBSCRIBED';renderPredictionDetails();});}
