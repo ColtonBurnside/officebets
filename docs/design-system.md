@@ -15,7 +15,7 @@ single-file deployment; new UI should use these tokens and the shared rendering 
 | Canvas / surface / raised / inset | `#0D1117` / `#161E28` / `#1A2532` / `#0B1017` |
 | Border / primary text / secondary text | `#2B3A4C` / `#F2F4F8` / `#B7C3D2` |
 | Primary cyan | **`#00F2FE`**: leading probability, energy, position, active channel, timeline and keyboard focus. Inactive categories, icons and borders stay neutral. |
-| Creation CTA | One New Prediction action with a dark-red gradient, neon-red edge, white label, subtle depth, and restrained hover glow/lift. |
+| Creation CTA | One New Prediction action with a dark-red gradient, neon-red edge, white label, subtle depth, and restrained hover brightness. No lift. |
 | Destruction | Quiet `#FF9393` text; danger background `#351C24` only where useful. Separate from routine actions; confirmation required. Never use red for NO odds. |
 | Resolved result | `#63DFAE` plus a check and winning outcome, not color alone. |
 | Headings / body / numerical data | Gotham Medium / Gotham Book / JetBrains Mono; system and monospace fallbacks. Font files are not in the repository, so no unlicensed font downloads or claims of exact font fidelity. |
@@ -72,13 +72,24 @@ reduced motion disables smooth scrolling. Edge buttons scroll approximately one 
 
 ## Admin hierarchy
 
-Verified admins see a discreet `•••` overflow on cards/hero and in detail. It contains
-Edit prediction (or a clear locked state), Resolve early/Resolve, and separated Delete
-prediction. The overlay escapes the shelf's overflow clipping; Escape returns focus,
-arrow keys navigate actions, and outside click/scroll closes it. Creator permissions remain
-accessible in detail without adding admin-looking controls to ordinary browsing cards.
+Show a discreet `•••` overflow on cards/hero and in detail whenever the selected badge has
+at least one permitted action. Ordinary creators can edit eligible predictions or close
+open predictions early. Verified admins additionally retain resolution, reversal and deletion
+where permitted. A selected admin badge still requires verified authority. The overlay
+escapes the shelf's overflow clipping; Escape returns focus, arrow keys navigate actions,
+and outside click/scroll closes it.
 Existing resolution and deletion confirmations are retained. Editing is still locked after
 the first trade or resolution.
+
+Persistent Bets uses the existing border-top sidebar section. Its header has a quiet,
+accessible plus affordance only for verified admins below the three-definition limit.
+The HTML hidden attribute takes precedence over component display rules. Badge, profile
+and New Prediction dialogs reuse the established surface, inset, border and control tokens.
+
+The hero retains the single gradient surface and border from pre-feature commit `b5891b2`;
+the preceding feature update did not introduce a second container or change that border.
+Its shelf-style arrow fades span the full outer edge. Content and pagination stay inset
+past the controls so their hit areas do not overlap.
 
 Clicking a creator opens a profile; verified admins can edit other profiles there. Settings
 provides profile and role management. Role changes require an explicit named confirmation;

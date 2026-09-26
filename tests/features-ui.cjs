@@ -7,12 +7,24 @@ const market=(i,resolved=false)=>({id:`33333333-3333-4333-8333-${String(i).padSt
 const snapshot={revision:1,serverTime:new Date().toISOString(),users:[user(admin,true),user(player,false)],markets:[market(1),market(2),market(3),market(4,true)],persistentBets:[{id:'55555555-5555-4555-8555-555555555555',title:'Daily prediction',description:'Rule',categoryId:'general',outcomes:['YES','NO'],cadence:'daily',closeTime:'17:00:00+00',weekday:null,active:true,nextOpenAt:new Date(Date.now()+86400000).toISOString()}],categories:[{id:'general',name:'General'}],transactions:[],house:{granted:0,returned:0}};
 (async()=>{
  const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
- const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[],requests=[];let authority=admin;
+ const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[],requests=[];let authority=null;
  page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());
  await page.route('**/*',route=>{const url=route.request().url();if(url==='https://officebets.test/')return route.fulfill({contentType:'text/html',body:fs.readFileSync(path.join(root,'index.html'),'utf8')});if(url.includes('/rpc/ob_snapshot'))return route.fulfill({json:snapshot});if(url.includes('/rpc/ob_admin_status'))return route.fulfill({json:{memberId:authority}});if(url.includes('/rpc/ob_market_view'))return route.fulfill({json:{history:[],activity:[]}});if(url.includes('/rpc/ob_action')){requests.push(route.request().postDataJSON());return route.fulfill({json:{...snapshot,revision:++snapshot.revision}});}if(url.includes('/auth/v1/logout')){authority=null;return route.fulfill({status:204});}return route.abort();});
  await page.routeWebSocket('**/*',ws=>ws.close());await page.goto('https://officebets.test/');await page.waitForFunction(()=>state.markets.length===4);
+ assert.equal(await page.locator('#persistentCreate').isVisible(),false,'Guest must not see persistent create');
+ await page.evaluate(id=>switchTeammate(id),admin);
+ assert.equal(await page.locator('#persistentCreate').isVisible(),false,'Unverified admin badge must not see persistent create');
  await page.evaluate(id=>switchTeammate(id),player);
+ assert.equal(await page.locator('#persistentCreate').isVisible(),false,'Ordinary creator must not see persistent create');
  assert(await page.locator('.market-overflow-trigger').count()>0);
+ await page.locator('#featuredMarket .market-overflow-trigger').click();
+ assert(await page.getByRole('menuitem',{name:'Close prediction early'}).isVisible());
+ assert.equal(await page.locator('#tradeModal').isVisible(),false);
+ await page.keyboard.press('Escape');
+ assert.equal(await page.locator('#marketOverflow').isVisible(),false);
+ const hero=await page.locator('#topMarkets').boundingBox(),edge=await page.locator('#featuredNext').boundingBox();
+ assert(edge.height>=hero.height-2,'Featured edge must span the full hero height');
+ for(const y of [edge.y+8,edge.y+edge.height-8])assert(await page.evaluate(({x,y})=>!!document.elementFromPoint(x,y)?.closest('#featuredNext'),{x:edge.x+edge.width/2,y}),'Hero edge must be clickable away from its center');
  await page.locator('.prediction-card .market-overflow-trigger').first().click();
  assert(await page.getByRole('menuitem',{name:'Close prediction early'}).count());
  assert.equal(await page.getByRole('menuitem',{name:'Resolve early'}).count(),0);
@@ -24,7 +36,7 @@ const snapshot={revision:1,serverTime:new Date().toISOString(),users:[user(admin
  const locked=page.locator('#avatarChoices button.locked');assert.equal(await locked.count(),4);
  assert.equal(await locked.first().getAttribute('title'),'Loan Shark');assert(await locked.first().isDisabled());
  await page.evaluate(()=>hideUtility('profileModal'));
- await page.evaluate(id=>{switchTeammate(id);verifiedAdminId=id;renderAll();},admin);
+ authority=admin;await page.evaluate(id=>{switchTeammate(id);verifiedAdminId=id;renderAll();},admin);
  await page.locator('.prediction-card .market-overflow-trigger').first().click();
  assert(await page.getByRole('menuitem',{name:'Resolve early'}).count());
  assert(await page.getByRole('menuitem',{name:'Delete prediction'}).count());
@@ -34,6 +46,10 @@ const snapshot={revision:1,serverTime:new Date().toISOString(),users:[user(admin
  await page.getByRole('menuitem',{name:'Reverse resolution'}).click();assert.equal(requests.at(-1).p_action,'reverse_resolution');
  assert(await page.locator('#persistentBets').getByText('Daily prediction').count());
  assert(await page.locator('#persistentCreate').isVisible());
+ assert.equal(await page.locator('#persistentCreate').getAttribute('aria-label'),'Create persistent bet');
+ await page.evaluate(()=>{const saved=state.persistentBets;state.persistentBets=[saved[0],saved[0],saved[0]];renderPersistentBets();state.persistentBets=saved;});
+ assert.equal(await page.locator('#persistentCreate').isVisible(),false,'At capacity, hide the create affordance');
+ await page.evaluate(()=>renderPersistentBets());
  await page.locator('#persistentCreate').click();assert(await page.locator('#persistentModal').isVisible());
  await page.locator('#persistentQuestion').fill('New recurring prediction');await page.locator('#persistentModal button[type=submit]').click();
  assert.equal(requests.at(-1).p_action,'create_persistent');

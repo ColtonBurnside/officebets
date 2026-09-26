@@ -2,6 +2,13 @@
 
 The app is still a standalone `index.html`; no runtime or build dependencies were added.
 
+- `node tests/market-controls.cjs` runs without external dependencies and checks the actual
+  permission/rendering functions across 13 guest, creator, unverified-admin, verified-admin,
+  closed, resolved and recurring-market states.
+- `features-ui.cjs` also checks hidden Persistent Bets controls for guests, ordinary badges,
+  unverified admins and the three-definition limit; creator hero overflow; and the complete
+  hero arrow height and hit region. These require the browser setup below.
+
 - `ui.cjs` uses an externally available Playwright installation. Run `node tests/ui.cjs` with Playwright on `NODE_PATH` if it is not installed locally. Optionally set `CHROMIUM_PATH` to a compatible Chromium executable. All network calls are mocked; no real accounts or trades are changed. It covers the desktop sidebar, category rows, carousel ranking/navigation, closing order, account menu/session persistence, settings, confirmed account deletion, search/tabs, 390/760/1024px layouts, empty states, whole-unit stake buttons, clickable cards, early-resolution UI, and a one-point odds line.
 - `account-deletion.sql` runs in a transaction against an **isolated** database with the existing OfficeBets schema and the new migration installed. It creates its own fixture badges and markets, then rolls them back. It covers admin-only deletion, self-deletion protection, typed-name confirmation, retry idempotency, deleted-badge rejection, unchanged prices/collateral/other wallets, volume retention, permanent first-trade edit locking, early admin settlement of another creator's market, and remaining players' payouts.
 
