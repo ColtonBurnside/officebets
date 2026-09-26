@@ -79,14 +79,26 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 
 </style><style>
-#sidebarNewPrediction{background:linear-gradient(145deg,#521018,#8c1926 48%,#4c0b13);border:1px solid #ff364f;color:#fff;box-shadow:inset 0 1px 0 #ff829055,0 4px 13px #16030766;transition:transform .18s,box-shadow .18s,filter .18s}
-#sidebarNewPrediction:hover{filter:brightness(1.12);transform:translateY(-2px);box-shadow:inset 0 1px 0 #ff9ca855,0 7px 20px #f1274940}
-#sidebarNewPrediction:active{transform:translateY(0)}
-.featured-panel>.row-edge{top:3px;bottom:46px}.featured-panel>.row-edge.prev{left:0}.featured-panel>.row-edge.next{right:0}
+/* Component display rules must never reveal permission-hidden controls. */
+[hidden]:not([hidden="until-found"]){display:none!important}
+#sidebarNewPrediction{background:linear-gradient(145deg,#521018,#8c1926 48%,#4c0b13);border:1px solid #ff364f;color:#fff;box-shadow:inset 0 1px 0 #ff829033,0 4px 13px #16030744;transition:box-shadow 120ms,filter 120ms}
+#sidebarNewPrediction:hover{filter:brightness(1.08);box-shadow:inset 0 1px 0 #ff9ca833,0 4px 13px #f1274920}
+/* Reuse shelf fades over the complete hero edge; keep its original single surface. */
+.featured-panel>.row-edge{top:0;bottom:0;height:auto;max-height:none}.featured-panel>.row-edge.prev{left:0}.featured-panel>.row-edge.next{right:0}
+.featured-panel{padding-left:54px;padding-right:54px}.featured-navigation{left:54px;right:54px}
+.market-overflow-trigger{display:inline-flex;align-items:center;justify-content:center;min-width:30px;color:var(--ob-secondary);border-radius:var(--ob-control-radius)}
+.market-overflow-trigger svg{width:18px;height:18px;pointer-events:none}
+.sidebar-create{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:30px;height:30px;border:0;border-radius:var(--ob-control-radius);background:transparent;color:var(--ob-secondary);font-size:22px;line-height:1}
+.sidebar-create:hover{background:var(--ob-hover);color:var(--ob-cyan)}
+#newMarketModal>div,#newTeammateModal>div,#profileModal>.utility-dialog,#profileViewModal>.utility-dialog{background:var(--ob-surface);border-color:var(--ob-border);border-radius:12px;box-shadow:0 24px 64px #0006}
+#newMarketModal input:not([type=radio]),#newMarketModal textarea,#newMarketModal select,#newMarketModal .link-preview,#newTeammateModal input,#newTeammateModal select,#profileModal input{background:var(--ob-inset);border-color:var(--ob-border);border-radius:var(--ob-control-radius);color:var(--ob-text)}
+#newMarketModal input:focus,#newMarketModal textarea:focus,#newMarketModal select:focus,#newTeammateModal input:focus,#newTeammateModal select:focus,#profileModal input:focus{border-color:var(--ob-cyan)}
+#newMarketModal button[type=submit],#newTeammateModal button[type=submit]{border-radius:var(--ob-control-radius);box-shadow:none}
+.avatar-choices button{border-color:var(--ob-border);border-radius:var(--ob-control-radius);background:var(--ob-inset)}.avatar-choices button:hover{background:var(--ob-hover)}
 .persistent-item{border-bottom:1px solid var(--ob-border);padding:13px 0}.persistent-item:last-child{border:0}.persistent-item strong{display:block;font-size:13px}.persistent-item small{display:block;color:var(--ob-muted);font-size:11px;margin-top:4px}.persistent-item-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.persistent-item-actions .utility{padding:5px 8px}
 .avatar-choices button.locked{filter:grayscale(1);opacity:.43;cursor:not-allowed}.avatar-choices button.locked:hover{background:transparent}
-@media(max-width:760px){.featured-panel>.row-edge{width:36px}.workspace-sidebar>.ending-panel:last-child{grid-row:7}}
-@media(prefers-reduced-motion:reduce){#sidebarNewPrediction{transition:none}#sidebarNewPrediction:hover{transform:none}}
+@media(max-width:760px){.featured-panel{padding-left:42px;padding-right:42px}.featured-navigation{left:42px;right:42px}.featured-panel>.row-edge{width:36px}.workspace-sidebar>.ending-panel:last-child{grid-row:7}}
+@media(prefers-reduced-motion:reduce){#sidebarNewPrediction{transition:none}}
 </style></head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-tesla-voltage selection:text-black">
 
@@ -289,7 +301,7 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
     </div>
 
         <section class="ending-panel" aria-labelledby="endingTitle"><div class="section-heading"><h2 id="endingTitle">Ending soon</h2><span aria-hidden="true">◷</span></div><div id="endingSoon"></div></section>
-        <section class="ending-panel" aria-labelledby="persistentTitle"><div class="section-heading"><h2 id="persistentTitle">Persistent Bets</h2><button id="persistentCreate" class="utility" onclick="openPersistentModal()" hidden>New</button></div><div id="persistentBets"></div></section>
+        <section class="ending-panel" aria-labelledby="persistentTitle"><div class="section-heading"><h2 id="persistentTitle">Persistent Bets</h2><button id="persistentCreate" type="button" class="sidebar-create" aria-label="Create persistent bet" title="Create persistent bet" onclick="openPersistentModal()" hidden><span aria-hidden="true">+</span></button></div><div id="persistentBets"></div></section>
       </aside>
     </div>
   </main>
@@ -383,7 +395,7 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
   </div>
 
   <!-- Modal: New Prediction Market -->
-  <div id="newMarketModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
+  <div id="newMarketModal" role="dialog" aria-modal="true" aria-label="Prediction editor" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
     <div class="bg-tesla-card border border-tesla-border w-full max-w-lg rounded-2xl p-6 relative space-y-4 shadow-2xl my-8">
       <button aria-label="Close dialog" onclick="closeNewMarketModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
         <i data-lucide="x" class="w-5 h-5"></i>
@@ -408,7 +420,7 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
           <textarea maxlength="2000" id="newMarketDescInput" oninput="updateMarkdownPreviews()" rows="2" class="w-full bg-[#080b11] border border-tesla-border rounded-xl px-3 py-2 text-white focus:outline-none focus:border-tesla-voltage" placeholder="Resolves YES if the update is live by 9 PM."></textarea>
         </div>
 
-        <div class="p-2.5 rounded-xl bg-[#080b11] border border-tesla-border">
+        <div class="link-preview p-2.5 rounded-xl bg-[#080b11] border border-tesla-border">
           <span class="text-[10px] text-gray-400 block mb-1 font-mono uppercase">Live Link Preview:</span>
           <div id="markdownLivePreview" class="text-xs text-gray-200">Start typing above...</div>
         </div>
@@ -1882,10 +1894,11 @@ body{background:var(--ob-canvas);color:var(--ob-text);font-family:var(--ob-body)
       if(admin&&!m.persistentBetId)actions.push({label:'Delete prediction',danger:true,run:()=>deletePrediction(m.id)});
       return actions;
     }
-    function marketControls(m){return marketActionOptions(m).some(action=>!action.disabled)?`<button class="market-overflow-trigger" aria-label="Manage prediction: ${escapeHtmlAttr(m.title)}" aria-haspopup="menu" aria-expanded="false" onclick="openMarketMenu(event,'${m.id}')">⋯</button>`:'';}
+    function availableMarketActions(m){return marketActionOptions(m).filter(action=>!action.disabled);}
+    function marketControls(m){return availableMarketActions(m).length?`<button type="button" class="market-overflow-trigger" aria-label="Manage prediction: ${escapeHtmlAttr(m.title)}" aria-haspopup="menu" aria-controls="marketOverflow" aria-expanded="false" onclick="openMarketMenu(event,'${m.id}')"><svg viewBox="0 0 18 18" fill="currentColor" aria-hidden="true"><circle cx="3" cy="9" r="1.5"/><circle cx="9" cy="9" r="1.5"/><circle cx="15" cy="9" r="1.5"/></svg></button>`:'';}
     function closeMarketMenu(restore=false){document.getElementById('marketOverflow').hidden=true;if(marketMenuTrigger){marketMenuTrigger.setAttribute('aria-expanded','false');if(restore&&marketMenuTrigger.isConnected)marketMenuTrigger.focus();}marketMenuTrigger=null;}
     function openMarketMenu(e,id){e.stopPropagation();const m=state.markets.find(m=>m.id===id);if(!m)return;const trigger=e.currentTarget;if(marketMenuTrigger===trigger)return closeMarketMenu(true);closeMarketMenu();marketMenuTrigger=trigger;trigger.setAttribute('aria-expanded','true');const menu=document.getElementById('marketOverflow');menu.innerHTML='';
-      for(const action of marketActionOptions(m)){const b=document.createElement('button');b.role='menuitem';b.textContent=action.label;b.disabled=!!action.disabled;if(action.danger)b.className='danger';b.onclick=()=>{closeMarketMenu();action.run?.();};menu.appendChild(b);}
+      for(const action of availableMarketActions(m)){const b=document.createElement('button');b.type='button';b.role='menuitem';b.textContent=action.label;if(action.danger)b.className='danger';b.onclick=()=>{closeMarketMenu();action.run?.();};menu.appendChild(b);}
       if(!menu.children.length)return closeMarketMenu();menu.hidden=false;const r=trigger.getBoundingClientRect();menu.style.left=Math.max(8,Math.min(innerWidth-208,r.right-200))+'px';menu.style.top=Math.max(8,Math.min(innerHeight-menu.offsetHeight-8,r.bottom+6))+'px';menu.querySelector('button:not(:disabled)')?.focus();
     }
     document.addEventListener('click',e=>{if(!e.target.closest('#marketOverflow,.market-overflow-trigger'))closeMarketMenu();});
